@@ -27,33 +27,20 @@ exports.create = (req, res) => {
           });
         });
 };
-exports.findAll = (req, res) => {
+exports.findAll = async (req, res) => {
   if(req.query.id){
-    const id = req.query.id;
-    Contain.findAll({ where: { tid: id } })
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving tutorials."
-      });
+    const id=req.query.id;
+    contains= await db.sequelize.query('SELECT * FROM CONTAINS WHERE TID=(:id)',{
+      replacements:{id:req.query.id},
+      type: db.sequelize.QueryTypes.SELECT
     });
+  return res.status(200).json(contains)
   }
   else{
-    const title = req.query.title;
-    var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-    Contain.findAll({ where: condition })
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving tutorials."
-        });
-      });
+    contains= await db.sequelize.query('SELECT * FROM CONTAINS ',{
+      type: db.sequelize.QueryTypes.SELECT
+    });
+  return res.status(200).json(contains)
   }
   };
 

@@ -1,6 +1,8 @@
 const db = require("../model");
 const Customer = db.customers;
 const Op = db.Sequelize.Op;
+const sequelize = require('sequelize');
+
 
 exports.create = (req, res) => {
     /*if (!req.body.title) {
@@ -30,7 +32,7 @@ exports.create = (req, res) => {
           });
         });
 };
-exports.findAll = (req, res) => {
+exports.findAll = async (req, res) => {
   if(req.query.id){
     const id = req.query.id;
     console.log(id)
@@ -51,19 +53,12 @@ exports.findAll = (req, res) => {
       });
   }
   else{
-    const title = req.query.title;
-    var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-    Customer.findAll({ where: condition })
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving tutorials."
-        });
-      });
+    customers= await db.sequelize.query('SELECT * FROM CUSTOMERS',{
+      type: db.sequelize.QueryTypes.SELECT
+    });
+    return res.status(200).json(customers)
   }
+  return res.status(200).json(customers)
   };
 
 exports.findOne = (req, res) => {

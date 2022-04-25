@@ -28,24 +28,15 @@ exports.create = (req, res) => {
           });
         });
 };
-exports.findAll = (req, res) => {
+exports.findAll = async (req, res) => {
   if(req.query.id){
     const id = req.query.id;
-    Product.findByPk(id)
-      .then(data => {
-        if (data) {
-          res.send(data);
-        } else {
-          res.status(404).send({
-            message: `Cannot find Tutorial with id=${id}.`
-          });
-        }
-      })
-      .catch(err => {
-        res.status(500).send({
-          message: "Error retrieving Tutorial with id=" + id
-        });
-      });
+    products= await db.sequelize.query('SELECT * FROM PRODUCTS WHERE ID=(:id)',{
+      replacements:{id:req.query.id},
+      type: db.sequelize.QueryTypes.SELECT
+    });
+    console.log(products)
+    return res.status(200).json(products)
   }
   else{
     const title = req.query.title;
