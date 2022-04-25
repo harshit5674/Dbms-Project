@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STYLEMART</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <!--Header-->
+    <header id="header">
+      <nav>
+        <div class="container">
+          <div class="text-center">
+            <a href="/worker" class="nav-brand text-dark"
+              >Clothes Management System</a
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main id="int-main">
+      <div class="container">
+        <div class="box-nav d-flex justify-between">
+          <a href="/add-worker" class="border-shadow">
+            <span class="text-gradient">New worker</span>
+          </a>
+        </div>
+        <br />
+        <form action="/worker" method="POST">
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th>Worker ID</th>
+                <th>Name</th>
+                <th>Mobile</th>
+                <th>House Number</th>
+                <th>Street</th>
+                <th>City</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for(var i=0;i < workers.length ;i++){%>
+              <tr>
+                <td><%=workers[i].id%></td>
+                <td><%=workers[i].name%></td>
+                <td><%=workers[i].mobile%></td>
+                <td><%=workers[i].house_number%></td>
+                <td><%=workers[i].street%></td>
+                <td><%=workers[i].city%></td>
+                <td>
+                  <a
+                    href="/update_worker?id=<%=workers[i].id%>"
+                    class="btn border-shadow update"
+                  >
+                    <span class="text-gradient"></span>
+                  </a>
+                  <a
+                    class="btn border-shadow delete"
+                    data-id=<%=workers[i].id%>>
+                    <span class="text-gradient"></span>
+                  </a>
+                </td>
+              </tr>
+              <%}%>
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </main>
+
+    <%-include('include/_footer')%>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STYLEMART</title>
+    <link  href="css/style.css"  rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <!--Header-->
+    <header id="header">
+        <nav>
+            <div class="container">
+                <div class="text-center">
+                    <a href="/customer" class="nav-brand text-dark">Clothes Management System</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+<main id="int-main">
+    <div class="container">
+        <div class="box-nav d-flex justify-between">
+            <div class="filter">     
+                <a href="/customer">All Customer</a>
+            </div>
+        </div>
+        <div class="form-title text-center">
+            <h2 class="text-dark">New Customer</h2>
+            <span class="text-dark">Use the below form to add new customer</span>
+        </div>
+        <form action="/api/customers" method="POST" id="add_customer" name="add_customer">
+            <div class="new_product">
+                <div class="form-group">
+                    <label for="id" class="text-dark">ID</label>
+                    <input type="text" name="id" id="id" placeholder="ID">
+                </div>
+                <div class="form-group">
+                    <label for="name" class="text-dark">Name</label>                   
+                    <input type="text" name="name" id="name"  placeholder="Name">
+                </div>
+                <div class="form-group">
+                    <label for="mobile" class="text-dark">Mobile</label>
+                    <input type="text" name="mobile" id="mobile" placeholder="Mobile">
+                </div>
+                <div class="form-group">
+                    <label for="house_number" class="text-dark">House Number</label>
+                    <input type="text" name="house_number" id="house_number" placeholder="House Number">
+                </div>
+                <div class="form-group">
+                    <label for="street" class="text-dark">Street</label>
+                    <input type="text" name="street" id="street" placeholder="Street">
+                </div>
+                <div class="form-group">
+                    <label for="city" class="text-dark">City</label>
+                    <input type="text" name="city" id="city" placeholder="City">
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn text-dark update">Save</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<%-include('include/_footer')%>

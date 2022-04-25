@@ -1,0 +1,45 @@
+<%-include('include/_header')%>
+
+<main id="int-main">
+    <div class="container">
+        <div class="box-nav d-flex justify-between">
+            <a href="/add-transaction" class="border-shadow">
+                <span class="text-gradient">New transaction</span>
+            </a>
+        </div>
+        <br>
+        <form action="/transaction" method="POST">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Transaction ID</th>
+                        <th>Date</th>
+                        <th>Customer ID</th>
+                        <th>Worker ID</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(var i=0;i < transactions.length ;i++){%>
+                    <tr>
+                        <td><%=transactions[i].id%></td>
+                        <td><%=transactions[i].date%></td>
+                        <td><%=transactions[i].cid%></td>
+                        <td><%=transactions[i].wid%></td>
+                        <td>
+                            <a href="/update_transaction?id=<%=transactions[i].id%>" class="btn border-shadow update">
+                                <span class="text-gradient"></span>
+                            </a>
+                            <a class="btn border-shadow delete" data-id=<%=transactions[i].id%>>
+                                <span class="text-gradient"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    <%}%>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</main>
+
+<%-include('include/_footer')%>

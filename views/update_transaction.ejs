@@ -1,0 +1,41 @@
+<%-include('include/_header')%>
+
+<main id="int-main">
+    <div class="container">
+        <div class="box-nav d-flex justify-between">
+            <div class="filter">
+        
+                <a href="/transaction">All Transactions</a>
+            </div>
+        </div>
+        <div class="form-title text-center">
+            <h2 class="text-dark">Update Transaction</h2>
+            <span class="text-dark">Use the below form to add new transaction</span>
+        </div>
+        <form method="POST" id="update_transaction">
+            <div class="new_product">
+                <div class="form-group">
+                    <label for="id" class="text-dark">ID</label>
+                    <input type="text" name="id" id="id" value="<%=transaction.id%>" placeholder="ID">
+                </div>
+                <div class="form-group">
+                    <label for="name" class="text-dark">Date</label>
+                    <input type="text" name="date" id="date" value="<%=transaction.date%>" placeholder="Date">
+                </div>
+                <div class="form-group">
+                    <label for="cid" class="text-dark">Customer ID</label>
+                    <input type="text" name="cid" id="cid" value="<%=transaction.cid%>" placeholder="Customer ID">
+                </div>
+                <div class="form-group">
+                    <label for="wid" class="text-dark">Worker ID</label>
+                    <input type="text" name="wid" id="wid" value="<%=transaction.wid%>" placeholder="Worker ID">
+                </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn text-dark update">Save</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<%-include('include/_footer')%>

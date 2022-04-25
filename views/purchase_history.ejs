@@ -1,0 +1,45 @@
+<%-include('include/_header')%>
+
+<main id="int-main">
+    <div class="container">
+        <div class="box-nav d-flex justify-between">
+            <a href="/add-purchase_history" class="border-shadow">
+                <span class="text-gradient">New Purchase</span>
+            </a>
+        </div>
+        <br>
+        <form action="/purchase_history" method="POST">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Purchase ID</th>
+                        <th>Purchase Date</th>
+                        <th>Seller Name</th>
+                        <th>Seller Mobilie</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(var i=0;i < purchase_historys.length ;i++){%>
+                    <tr>
+                        <td><%=purchase_historys[i].id%></td>
+                        <td><%=purchase_historys[i].name%></td>
+                        <td><%=purchase_historys[i].date%></td>
+                        <td><%=purchase_historys[i].mobile%></td>
+                        <td>
+                            <a href="/update_purchase_history?id=<%=purchase_historys[i].id%>" class="btn border-shadow update">
+                                <span class="text-gradient"></span>
+                            </a>
+                            <a class="btn border-shadow delete" data-id=<%=purchase_historys[i].id%>>
+                                <span class="text-gradient"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    <%}%>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</main>
+
+<%-include('include/_footer')%>
