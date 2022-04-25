@@ -20,6 +20,27 @@ $("#add_product").submit(function(event){
     alert("New Product Created");
 })
 
+$("#add_transaction").submit(function(event){
+    event.preventDefault();
+    var unindexed_array = $(this).serializeArray();
+    var data={};
+    console.log('HI');
+    $.map(unindexed_array,function(n,i){
+        data[n['name']]=n['value']
+    })
+    console.log(data)
+    var id=data.id
+    console.log(id)
+    var request={
+        "url": 'http://localhost:3000/api/transactions/',
+        "method":"POST",
+        "data":data
+    }
+    $.ajax(request).done(function(response){
+        window.location.href = "/contain"+"?id="+data.id;
+    })
+})
+
 $("#update_product").submit(function(event){
     event.preventDefault();
     var unindexed_array = $(this).serializeArray();

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STYLEMART</title>
+    <link  href="css/style.css"  rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <!--Header-->
+    <header id="header">
+        <nav>
+            <div class="container">
+                <div class="text-center">
+                    <a href="/contain" class="nav-brand text-dark">Clothes Management System</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+<main id="int-main">
+    <div class="container">
+        <div class="box-nav d-flex justify-between">
+            <div class="filter">     
+                <a href="/contain">All Customer</a>
+            </div>
+        </div>
+        <div class="form-title text-center">
+            <h2 class="text-dark">New Customer</h2>
+            <span class="text-dark">Use the below form to add new customer</span>
+        </div>
+        <form action="/api/contains" method="POST" id="add_contains" name="add_contains">
+            <div class="new_product">
+                <div class="form-group">
+                    <label for="id" class="text-dark">Transaction ID</label>
+                    <input
+                      type="text"
+                      name="tid"
+                      id="tid"
+                      value="<%=tid%>"
+                      placeholder="ID"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="pid" class="text-dark">Product ID</label>
+                    <input
+                      type="text"
+                      name="pid"
+                      id="pid"
+                      value=""
+                      placeholder="Product ID"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="quantity" class="text-dark">Quantity</label>
+                    <input
+                      type="text"
+                      name="quantity"
+                      id="quantity"
+                      value=""
+                      placeholder="Quantity"
+                    />
+                  </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn text-dark update">Save</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<%-include('include/_footer')%>

@@ -18,6 +18,7 @@ require("./server/routes/product.routes")(app);
 require("./server/routes/customer.routes")(app);
 require("./server/routes/transaction.routes")(app);
 require("./server/routes/worker.routes")(app);
+require("./server/routes/contain.routes")(app);
 
 
 

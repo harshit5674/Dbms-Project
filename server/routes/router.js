@@ -54,6 +54,32 @@ route.get('/update_customer',(req,res)=>{
         res.render("update_customer",{customer:productdata.data});
     })
 })
+route.get('/contain',(req,res)=>{
+    const id = req.query.id;
+    console.log(id);
+    axios.get("http://localhost:3000/api/contains/",{params:{id:req.query.id}})
+     .then(function(response){
+        res.render("contain",{contains:response.data,tid:req.query.id});
+     })
+    .catch(err=>{
+        res.send(err);
+    })
+})
+route.get('/add-contain',(req,res)=>{
+    const id=req.query.id;
+    console.log(id)
+    res.render("add_contain",{tid:req.query.id});
+})
+route.get('/update_contain',(req,res)=>{
+    const id=req.params.id;
+    console.log(id);
+    axios.get('http://localhost:3000/api/contains/',{params:{id:req.query.id}})
+    .then(function(productdata){
+        console.log(id);
+        console.log(productdata.data)
+        res.render("update_contains",{contain:productdata.data});
+    })
+})
 route.get('/transaction',(req,res)=>{
     axios.get("http://localhost:3000/api/transactions/")
      .then(function(response){

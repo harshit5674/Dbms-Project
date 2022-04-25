@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STYLEMART</title>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <!--Header-->
+    <header id="header">
+      <nav>
+        <div class="container">
+          <div class="text-center">
+            <a href="/contain" class="nav-brand text-dark"
+              >Clothes Management System</a
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main id="int-main">
+      <div class="container">
+        <div class="box-nav d-flex justify-between">
+          <div class="filter">
+            <a href="/contain">All Customers</a>
+          </div>
+        </div>
+        <div class="form-title text-center">
+          <h2 class="text-dark">Update Contains</h2>
+          <span class="text-dark">Use the below form to add new contain</span>
+        </div>
+        <form method="POST" id="update_contain">
+          <div class="new_product">
+            <div class="form-group">
+              <label for="id" class="text-dark">ID</label>
+              <input
+                type="text"
+                name="tid"
+                id="tid"
+                value="<%=contain.tid%>"
+                placeholder="ID"
+              />
+            </div>
+            <div class="form-group">
+              <label for="name" class="text-dark">Name</label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                value="<%=contain.pid%>"
+                placeholder="Name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="mobile" class="text-dark">Mobile</label>
+              <input
+                type="text"
+                name="mobile"
+                id="mobile"
+                value="<%=contain.quantity%>"
+                placeholder="Mobile"
+              />
+            </div>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn text-dark update">Save</button>
+          </div>
+        </form>
+      </div>
+    </main>
+    <%-include('include/_footer')%>
+  </body>
+</html>
