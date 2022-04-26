@@ -239,5 +239,6 @@ $("#update_worker").submit(function(event){
     }
     $.ajax(request).done(function(response){
         alert("Worker Updated")
+        window.location.href = "/worker";
     })
 })

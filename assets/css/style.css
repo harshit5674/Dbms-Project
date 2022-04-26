@@ -34,7 +34,7 @@ a{
     flex-wrap: wrap;
 }
 body {
-    background-color: lightblue;
+    background-color: #6bc1e9;
 }
 
 .justify-between{
@@ -63,7 +63,7 @@ body {
 }
 
 #header nav{
-    background-color:#588BAE;
+    background-color:#37517e;
     padding:1em 0;
     width: 100%;
 }
@@ -101,7 +101,7 @@ table{
 }
 
 .table tr:hover{
-    background-color: #588BAE;
+    background-color: #37517e;
 }
 .table tr:hover td > a{
     box-shadow: none;
@@ -161,7 +161,7 @@ table{
 #update_product .form-group .btn{
     width:80%;
     padding:0.5em 0.5em;
-    background-color: #588BAE;
+    background-color: #37517e;
     border:none;
     font-family: 'PT Sans',sans-serif;
     font-size:1em;
