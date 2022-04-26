@@ -28,7 +28,19 @@ exports.create = (req, res) => {
         });
 };
 exports.findAll = async (req, res) => {
-  if(req.query.id){
+  if(req.query.sum){
+    const id=req.query.id;
+      contains= await db.sequelize.query('UPDATE PRODUCTS,CONTAINS SET PRODUCTS.QUANTITY=PRODUCTS.QUANTITY-CONTAINS.QUANTITY WHERE PRODUCTS.ID=CONTAINS.PID AND CONTAINS.TID=(:id)',{
+        replacements:{id:req.query.id},
+        type: db.sequelize.QueryTypes.UPDATE
+      });
+     sums= await db.sequelize.query('SELECT SUM(C.QUANTITY*P.SELLING_PRICE) AS TOTAL FROM PRODUCTS P,CONTAINS C WHERE P.ID=C.PID AND C.TID=(:id)',{
+     replacements:{id:req.query.id},
+       type: db.sequelize.QueryTypes.SELECT
+     });
+  return res.status(200).json(sums)
+  }
+  else if(req.query.id){
     const id=req.query.id;
     contains= await db.sequelize.query('SELECT * FROM CONTAINS WHERE TID=(:id)',{
       replacements:{id:req.query.id},

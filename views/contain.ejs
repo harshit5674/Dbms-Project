@@ -56,6 +56,27 @@
                 </tbody>
             </table>
         </form>
+        <br>
+        
+        <button onclick="generateBill()">Buy</button>
+        <script>
+            function generateBill() {
+                const queryString = window.location.search;
+                const urlParams = new URLSearchParams(queryString);
+                const id = urlParams.get('id')
+                fetch("http://localhost:3000/api/contains?id="+id+"&sum=1")
+                .then(response => {
+                if(response.ok) {
+                    return response.json();
+    }
+}).then(data => {
+    console.log(data[0])
+                alert("Your Bill Is "+data[0].TOTAL)
+                window.location.href = "/transaction";
+            })
+        }
+        </script>
+        
     </div>
 </main>
 
