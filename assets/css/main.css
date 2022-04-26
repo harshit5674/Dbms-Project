@@ -380,9 +380,9 @@ h6 {
    #BUTTON
    ========================================================================== */
 .btn {
-    border: 2px solid black;
+    border: 2px solid white;
     background-color: #37517e;
-    color: black;
+    color: white;
     padding: 14px 28px;
     font-size: 16px;
     cursor: pointer;

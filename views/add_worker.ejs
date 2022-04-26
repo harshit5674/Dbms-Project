@@ -64,7 +64,7 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto active" href="/">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li>
             <a class="nav-link scrollto" href="/worker">Worker</a>
@@ -109,7 +109,7 @@
                     <h2 class="title">Add A New Worker</h2>
                 </div>
                 <div class="card-body">
-                    <form method="POST">
+                    <form action="/api/workers" method="POST" id="add_worker" name="add_worker">
                       <div class="form-row">
                         <div class="name">ID</div>
                         <div class="value">
@@ -127,32 +127,43 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="name">Quantity</div>
+                            <div class="name">Mobile</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-5" type="text" name="quantity" id="quantity" placeholder="Quantity">
+                                    <input class="input--style-5" type="text" name="mobile" id="mobile" placeholder="Mobile">
                                 </div>
                             </div>
                         </div>
                         <div class="form-row">
-                          <div class="name">Selling Price</div>
+                          <div class="name">House Number</div>
                           <div class="value">
                               <div class="input-group">
-                                  <input class="input--style-5" type="text" name="selling_price" id="selling_price" placeholder="Selling Price">
+                                  <input class="input--style-5" type="text" name="house_number" id="house_number" placeholder="House Number">
                               </div>
                           </div>
                       </div>
+                      <div class="form-row">
+                        <div class="name">Street</div>
+                        <div class="value">
+                            <div class="input-group">
+                                <input class="input--style-5" type="text" name="street" id="street" placeholder="Street">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="name">City</div>
+                      <div class="value">
+                          <div class="input-group">
+                              <input class="input--style-5" type="text" name="city" id="city" placeholder="City">
+                          </div>
+                      </div>
+                  </div>
                       <style>
-                        .gwen { 
-                          height: 200px;
-                          position: relative;
-                          border: 3px solid green; 
-                        }
                         
                         .ben {
                           margin: 0;
                           position: absolute;
-                          top: 89%;
+                          top: 91%;
                           left: 50%;
                           -ms-transform: translate(-50%, -50%);
                           transform: translate(-50%, -50%);
@@ -173,6 +184,8 @@
     <script src="js/vendor/select2/select2.min.js"></script>
     <script src="js/vendor/datepicker/moment.min.js"></script>
     <script src="js/vendor/datepicker/daterangepicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/index_1.js"></script>
 
     <!-- Main JS-->
     <script src="js/global.js"></script>
