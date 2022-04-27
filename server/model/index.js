@@ -22,6 +22,9 @@ db.transactions = require("./transaction.model.js")(sequelize, Sequelize);
 db.contains = require("./contain.model.js")(sequelize, Sequelize);
 db.rentals = require("./rental.model.js")(sequelize, Sequelize);
 db.rents = require("./rent.model.js")(sequelize, Sequelize);
+db.purchase_histories  = require("./purchase_history.model.js")(sequelize, Sequelize);
+db.purchases = require("./purchase.model.js")(sequelize, Sequelize);
+
 
 
 module.exports = db;

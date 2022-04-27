@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-    const Purchase_history = sequelize.define("Purchase_history", {
+    const Purchase_history = sequelize.define("purchase_history", {
       id: {
         type: Sequelize.STRING,
         primaryKey: true

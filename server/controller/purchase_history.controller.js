@@ -1,5 +1,5 @@
 const db = require("../model");
-const Purchase_history = db.purchase_historys;
+const Purchase_history = db.purchase_histories;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {

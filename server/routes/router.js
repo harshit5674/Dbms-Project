@@ -155,6 +155,55 @@ route.get('/update_transaction',(req,res)=>{
         res.render("update_transaction",{transaction:productdata.data});
     })
 })
+route.get('/purchase_history',(req,res)=>{
+    axios.get("http://localhost:3000/api/purchase_histories/")
+     .then(function(response){
+        res.render("purchase_history",{purchase_histories:response.data});
+     })
+    .catch(err=>{
+        res.send(err);
+    })
+})
+route.get('/add-purchase_history',(req,res)=>{
+    res.render("add_purchase_history");
+})
+route.get('/update_purchase_history',(req,res)=>{
+    const id=req.params.id;
+    console.log(id);
+    params:{id:req.params.id};
+    axios.get('http://localhost:3000/api/purchase_histories',{params:{id:req.query.id}})
+    .then(function(productdata){
+        const id=req.query.id;
+        console.log(id);
+        console.log(productdata.data)
+        res.render("update_purchase_history",{purchase_history:productdata.data});
+    })
+})
+route.get('/purchase',(req,res)=>{
+    const id = req.query.id;
+    console.log(id);
+    axios.get("http://localhost:3000/api/purchases/",{params:{id:req.query.id}})
+     .then(function(response){
+        res.render("purchase",{purchases:response.data,tid:req.query.id});
+     })
+    .catch(err=>{
+        res.send(err);
+    })
+})
+route.get('/add-purchase',(req,res)=>{
+    const id=req.query.id;
+    console.log(id)
+    res.render("add_purchase",{tid:req.query.id});
+})
+route.get('/update_purchase',(req,res)=>{
+    axios.get("http://localhost:3000/api/purchases?id="+req.query.id+"&pid="+req.query.pid)
+    .then(function(productdata){
+        console.log(productdata);
+        console.log(productdata.data);
+        console.log('HI');
+        res.render("update_purchase",{purchase:productdata.data,tid:req.query.id});
+    })
+})
 route.get('/worker',(req,res)=>{
     axios.get("http://localhost:3000/api/workers/")
      .then(function(response){

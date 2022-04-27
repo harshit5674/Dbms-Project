@@ -40,6 +40,26 @@ $("#add_transaction").submit(function(event){
         window.location.href = "/contain"+"?id="+data.id;
     })
 })
+$("#add_purchase_history").submit(function(event){
+    event.preventDefault();
+    var unindexed_array = $(this).serializeArray();
+    var data={};
+    console.log('HI');
+    $.map(unindexed_array,function(n,i){
+        data[n['name']]=n['value']
+    })
+    console.log(data)
+    var id=data.id
+    console.log(id)
+    var request={
+        "url": 'http://localhost:3000/api/purchase_histories/',
+        "method":"POST",
+        "data":data
+    }
+    $.ajax(request).done(function(response){
+        window.location.href = "/purchase"+"?id="+data.id;
+    })
+})
 $("#add_rental").submit(function(event){
     event.preventDefault();
     var unindexed_array = $(this).serializeArray();
@@ -102,6 +122,24 @@ $("#add_contains").submit(function(event){
 
 
     
+})
+$("#add_purchases").submit(function(event){
+    event.preventDefault();
+    var unindexed_array = $(this).serializeArray();
+    var data1={};
+    console.log('HI');
+    $.map(unindexed_array,function(n,i){
+        data1[n['name']]=n['value']
+    })
+     var request={
+                "url": 'http://localhost:3000/api/purchases/',
+                "method":"POST",
+                "data":data1
+            }
+            $.ajax(request).done(function(response){
+               window.location.href = "/contain?id="+data1.phid;
+     })
+    window.location.href = "/purchase?id="+data1.phid;
 })
 $("#add_rents").submit(function(event){
     event.preventDefault();
@@ -282,6 +320,27 @@ $("#update_transaction").submit(function(event){
         window.location.href = "/transaction";
     })
 })
+$("#update_purchase_history").submit(function(event){
+    event.preventDefault();
+    var unindexed_array = $(this).serializeArray();
+    var data={};
+    console.log('HI');
+    $.map(unindexed_array,function(n,i){
+        data[n['name']]=n['value']
+    })
+    console.log(data)
+    var id=data.id
+    console.log(id)
+    var request={
+        "url": 'http://localhost:3000/api/purchase_histories/'+data.id,
+        "method":"PUT",
+        "data":data
+    }
+    $.ajax(request).done(function(response){
+        alert("Purchase History Updated")
+        window.location.href = "/purchase_history";
+    })
+})
 $("#update_rental").submit(function(event){
     event.preventDefault();
     var unindexed_array = $(this).serializeArray();
@@ -317,6 +376,23 @@ if(window.location.pathname=="/transaction"){
         $.ajax(request).done(function(response){
         alert("Data Deleted succesfully");
         window.location.href = "/transaction";
+    })
+    }
+    })
+}
+if(window.location.pathname=="/purchase_history"){
+    $ondelete=$(".table tbody td a.delete")
+    $ondelete.click(function(){
+        var id=$(this).attr("data-id")
+        var request={
+        "url": 'http://localhost:3000/api/purchase_histories/'+id,
+        "method":"DELETE",
+    }
+
+    if(confirm("The selected purchase will be deleted.")){
+        $.ajax(request).done(function(response){
+        alert("Data Deleted succesfully");
+        window.location.href = "/purchase_history";
     })
     }
     })

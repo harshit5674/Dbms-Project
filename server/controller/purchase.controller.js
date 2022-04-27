@@ -1,5 +1,5 @@
 const db = require("../model");
-const Rent = db.rents;
+const Purchase = db.purchases;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
@@ -9,16 +9,18 @@ exports.create = (req, res) => {
         });
         return;
       }*/
-      const  rent= {
-        tid: req.body.tid,
-        pid: req.body.pid,
-        quantity: req.body.quantity,
+      const  purchase= {
+        tid: req.body.pid,
+        pid: req.body.phid,
+        quantity_sell: req.body.quantity_sell,
+        quantity_rent: req.body.quantity_rent,
+        cost_price: req.body.cost_price,
       };
       // Save Tutorial in the database
-      Rent.create(rent)
+      Purchase.create(rent)
         .then(data => {
           //res.send(data);
-          res.redirect("/add-rent");
+          res.redirect("/add-purchase");
         })
         .catch(err => {
           res.status(500).send({
@@ -109,7 +111,7 @@ exports.update = async (req, res) => {
   };
 
   exports.deleteAll = (req, res) => {
-    Rental.destroy({
+    Purchase.destroy({
       where: {},
       truncate: false
     })

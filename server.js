@@ -21,8 +21,8 @@ require("./server/routes/worker.routes")(app);
 require("./server/routes/contain.routes")(app);
 require("./server/routes/rental.routes")(app);
 require("./server/routes/rent.routes")(app);
-
-
+require("./server/routes/purchase_history.routes")(app);
+require("./server/routes/purchase.routes")(app);
 
 
 const db=require("./server/model");

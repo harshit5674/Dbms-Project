@@ -107,44 +107,43 @@
         <div class="wrapper wrapper--w790">
             <div class="card card-5">
                 <div class="card-heading">
-                    <h2 class="title">Update Purchase</h2>
+                    <h2 class="title">Add A New Product To Cart</h2>
                 </div>
                 <div class="card-body">
-                    <form  id="update_purchase_history">
-                      <div class="form-row">
-                        <div class="name">ID</div>
-                        <div class="value">
+                    <form action="/api/purchases" method="POST" id="add_purchases" name="add_purchases">
+                      <!-- <div class="form-row">
+                        <div class="name">Transaction ID</div>
+                        <div class="value"> -->
                             <div class="input-group">
-                                <input class="input--style-5" type="text" name="id" id="id" value="<%=purchase_history.id%>" placeholder="ID">
-                            </div>
-                        </div>
+                                <input class="input--style-5" type="hidden" name="phid" id="phid" value="<%=tid%>" placeholder="ID">
+                            <!-- </div>
+                        </div> -->
                     </div>
                         <div class="form-row">
-                            <div class="name">Date</div>
+                            <div class="name">Product ID</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-5" type="date" name="date" id="date" value="<%=purchase_history.date%>" placeholder="Date">
+                                    <input class="input--style-5" type="text" name="pid" id="pid" placeholder="Product ID">
                                 </div>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="name">Seller Name</div>
+                            <div class="name">Sell Quantity</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-5" type="text" name="name" id="name" value="<%=purchase_history.name%>" placeholder="Seller Name">
+                                    <input class="input--style-5" type="text" name="quantity_sell" id="quantity_sell" placeholder="Quantity">
                                 </div>
                             </div>
                         </div>
                         <div class="form-row">
-                          <div class="name">Seller Mobile</div>
-                          <div class="value">
-                              <div class="input-group">
-                                  <input class="input--style-5" type="text" name="mobile" id="mobile" value="<%=purchase_history.mobile%>" placeholder="Seller Mobile">
-                              </div>
-                          </div>
-                      </div>
+                            <div class="name">Rent Quantity</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-5" type="text" name="quantity_rent" id="quantity_rent" placeholder="Quantity">
+                                </div>
+                            </div>
+                        </div>
                       
-                    
                       <style>
                         
                         .ben {
@@ -157,7 +156,7 @@
                         }
                       </style>
                         <div>
-                          <button type="submit" class="btn btn-outline-secondary ben" >Update Transaction</button>
+                          <button type="submit" class="btn btn-outline-secondary ben" >Add A New Product</button>
                         </div>
                     </form>
                 </div>

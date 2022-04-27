@@ -89,7 +89,7 @@
             }
           </style>
             <div>
-              <a href="/add-purchase_history" class="btn btn-outline-secondary ben" >Add A New Purchase</a>
+              <a href="/add-purchase?id=<%=tid%>" class="btn btn-outline-secondary ben" >Add A New Product To Purchase</a>
             </div>
             <br>
 	<section class="ftco-section">
@@ -104,22 +104,25 @@
 					    <thead class="thead-primary">
 					      <tr>
 					        <th>Purchase ID</th>
-					        <th>Date</th>
-					        <th>Seller Name</th>
-					        <th>Seller Mobile</th>
+					        <th>Product ID</th>
+					        <th>Sell Quantity</th>
+                            <th>Rent Quantity</th>
+                            <th>Cost Price</th>
 					        <th>Update</th>
 					        <th>Delete</th>
 					      </tr>
 					    </thead>
 					    <tbody>
-                            <% for(var i=0;i < purchase_histories.length ;i++){%>
+                            <% for(var i=0;i < purchases.length ;i++){%>
                                 <tr>
-                                    <td><%=purchase_histories[i].id%></td>
-                                    <td><%=purchase_histories[i].date%></td>
-                                    <td><%=purchase_histories[i].name%></td>
-                                    <td><%=purchase_histories[i].mobile%></td>
-                                    <td><a href="/update_purchase_history?id=<%=purchase_histories[i].id%>" class="btn btn-success">Update</a></td>
-                                    <td><a class="btn btn-danger delete" data-id=<%=purchase_histories[i].id%>>Delete</a></td>
+                                    <td><%=purchases[i].phid%></td>
+                                    <td><%=purchases[i].pid%></td>
+                                    <td><%=purchases[i].quantity_sell%></td>
+                                    <td><%=purchases[i].quantity_rent%></td>
+                                    <td><%=purchases[i].cost_price%></td>
+
+                                    <td><a href="/update_purchase?id=<%=purchases[i].phid%>&pid=<%=purchases[i].pid%>" class="btn btn-success">Update</a></td>
+                                    <td><button class="btn btn-danger" onclick="delete_all(<%=purchases[i].phid%>,<%=purchases[i].pid%>)">Delete</button></td>
                                 </tr>
                                 <%}%>
 					    </tbody>
@@ -129,6 +132,44 @@
 			</div>
 		</div>
 	</section>
+    <style>          
+        .ben1 {
+          margin: 0;
+          position: relative;
+          top: 12%;
+          left: 50%;
+          -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+        }
+      </style>
+    <br>
+    <button onclick="generateBill()" class ="btn btn-outline-secondary ben1" >Buy</button>
+    <script>
+      function generateBill() {
+          const queryString = window.location.search;
+          const urlParams = new URLSearchParams(queryString);
+          const tid = urlParams.get('id')
+          var request={
+              "url": 'http://localhost:3000/api/rents?tid='+tid+'&sum=1',
+              "method":"PUT",
+          }
+    $.ajax(request).done(function(response){
+          })
+      alert('All Items Are Issued')
+      window.location.href = "/rental";
+  }
+  function delete_all(tid,pid){
+    console.log('IN');
+    var request={
+              "url": 'http://localhost:3000/api/rents?tid='+tid+'&pid='+pid,
+              "method":"DELETE",
+          }
+    $.ajax(request).done(function(response){
+          })
+      alert('Item would be Deleted')
+      window.location.href = "/rent?id="+tid;
+  }
+  </script>
 
 	<script src="js/jquery.min.js"></script>
   <script src="js/popper.js"></script>
