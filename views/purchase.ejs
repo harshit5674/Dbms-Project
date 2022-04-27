@@ -150,24 +150,24 @@
           const urlParams = new URLSearchParams(queryString);
           const tid = urlParams.get('id')
           var request={
-              "url": 'http://localhost:3000/api/rents?tid='+tid+'&sum=1',
+              "url": 'http://localhost:3000/api/purchases?phid='+id+'&sum=1',
               "method":"PUT",
           }
     $.ajax(request).done(function(response){
           })
-      alert('All Items Are Issued')
-      window.location.href = "/rental";
+      alert('All Items Are Bought')
+      window.location.href = "/purchase_history";
   }
-  function delete_all(tid,pid){
+  function delete_all(phid,pid){
     console.log('IN');
     var request={
-              "url": 'http://localhost:3000/api/rents?tid='+tid+'&pid='+pid,
+              "url": 'http://localhost:3000/api/purchases?phid='+phid+'&pid='+pid,
               "method":"DELETE",
           }
     $.ajax(request).done(function(response){
           })
       alert('Item would be Deleted')
-      window.location.href = "/rent?id="+tid;
+      window.location.href = "/purchase?id="+phid;
   }
   </script>
 

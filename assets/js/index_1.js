@@ -131,13 +131,14 @@ $("#add_purchases").submit(function(event){
     $.map(unindexed_array,function(n,i){
         data1[n['name']]=n['value']
     })
+    console.log(data1)
      var request={
-                "url": 'http://localhost:3000/api/purchases/',
-                "method":"POST",
-                "data":data1
-            }
+            "url": 'http://localhost:3000/api/purchases/',
+            "method":"POST",
+            "data":data1
+        }
             $.ajax(request).done(function(response){
-               window.location.href = "/contain?id="+data1.phid;
+               //window.location.href = "/purchase?id="+data1.phid;
      })
     window.location.href = "/purchase?id="+data1.phid;
 })

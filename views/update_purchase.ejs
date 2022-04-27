@@ -107,11 +107,11 @@
         <div class="wrapper wrapper--w790">
             <div class="card card-5">
                 <div class="card-heading">
-                    <h2 class="title">Add A New Product To Cart</h2>
+                    <h2 class="title">Update Cart</h2>
                 </div>
                 <div class="card-body">
-                    <form action="/api/purchases" method="POST" id="add_purchases" name="add_purchases">
-                      <!-- <div class="form-row">
+                  <form method="POST" id="update_rent" ></form>
+                    <!-- <div class="form-row">
                         <div class="name">Transaction ID</div>
                         <div class="value"> -->
                             <div class="input-group">
@@ -123,36 +123,36 @@
                             <div class="name">Product ID</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-5" type="text" name="pid" id="pid" placeholder="Product ID">
+                                    <input class="input--style-5" type="text" name="pid" id="pid" value="<%=purchase[0].pid%>" placeholder="Product ID">
                                 </div>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="name">Sell Quantity</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <input class="input--style-5" type="text" name="quantity_sell" id="quantity_sell" placeholder="Quantity">
-                                </div>
+                          <div class="name">Sell Quantity</div>
+                          <div class="value">
+                              <div class="input-group">
+                                  <input class="input--style-5" type="text" name="quantity_sell" id="quantity_sell" value="<%=purchase[0].quantity_sell%>" placeholder="Quantity">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="form-row">
+                        <div class="name">Rent Quantity</div>
+                        <div class="value">
+                            <div class="input-group">
+                                <input class="input--style-5" type="text" name="quantity_rent" id="quantity_rent" value="<%=purchase[0].quantity_rent%>" placeholder="Quantity">
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="name">Rent Quantity</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <input class="input--style-5" type="text" name="quantity_rent" id="quantity_rent" placeholder="Quantity">
-                                </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="name">Cost Price</div>
+                        <div class="value">
+                            <div class="input-group">
+                                <input class="input--style-5" type="text" name="cost_price" id="cost_price" value="<%=purchase[0].cost_price%>" placeholder="Quantity">
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="name">Cost Price</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <input class="input--style-5" type="text" name="cost_price" id="cost_price" placeholder="Cost Price">
-                                </div>
-                            </div>
-                        </div>
-                    
+                    </div>
                       
+                    
                       <style>
                         
                         .ben {
@@ -165,22 +165,40 @@
                         }
                       </style>
                         <div>
-                          <button type="submit" class="btn btn-outline-secondary ben" >Add A New Product</button>
+                          <button onclick="solve()" class="btn btn-outline-secondary ben" >Update Cart</button>
                         </div>
+            <script>
+              function solve(){
+                console.log('Plwase WOek')
+                var phid = document.getElementById("phid").value;
+                var pid = document.getElementById("pid").value;
+                var quantity_sell = document.getElementById("quantity_sell").value;
+                var quantity_rent = document.getElementById("quantity_rent").value;
+                var cost_price = document.getElementById("cost_price").value;
+
+          var request={
+              "url": 'http://localhost:3000/api/purchases?phid='+phid+'&pid='+pid+'&quantity_sell='+quantity_sell+'&quantity_rent='+quantity_rent+'&cost_price='+cost_price,
+              "method":"PUT",
+          }
+          $.ajax(request).done(function(response){
+          })
+      window.location.href="/purchase?id="+phid;
+              }
+            </script>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/js/index_1.js"></script>  
     <!-- Jquery JS-->
     <script src="js/vendor/jquery/jquery.min.js"></script>
     <!-- Vendor JS-->
     <script src="js/vendor/select2/select2.min.js"></script>
     <script src="js/vendor/datepicker/moment.min.js"></script>
     <script src="js/vendor/datepicker/daterangepicker.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="/js/index_1.js"></script>
+   
 
     <!-- Main JS-->
     <script src="js/global.js"></script>

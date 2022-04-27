@@ -2,32 +2,21 @@ const db = require("../model");
 const Purchase = db.purchases;
 const Op = db.Sequelize.Op;
 
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
     /*if (!req.body.title) {
         res.status(400).send({
           message: "Content can not be empty!"
         });
         return;
       }*/
-      const  purchase= {
-        tid: req.body.pid,
-        pid: req.body.phid,
-        quantity_sell: req.body.quantity_sell,
-        quantity_rent: req.body.quantity_rent,
-        cost_price: req.body.cost_price,
-      };
-      // Save Tutorial in the database
-      Purchase.create(rent)
-        .then(data => {
-          //res.send(data);
-          res.redirect("/add-purchase");
-        })
-        .catch(err => {
-          res.status(500).send({
-            message:
-              err.message || "Some error occurred while creating the product."
-          });
-        });
+      rents= await db.sequelize.query('INSERT INTO PURCHASES VALUES((:pid),(:phid),(:quantity_sell),(:quantity_rent),(:cost_price))',{
+        replacements:{pid:req.body.pid,
+        phid:req.body.phid,
+    quantity_sell:req.body.quantity_sell,
+        quantity_rent:req.body.quantity_rent,
+    cost_price:req.body.cost_price},
+        type: db.sequelize.QueryTypes.INSERT
+      });
 };
 exports.findAll = async (req, res) => {
   if(req.query.sum){
@@ -40,7 +29,7 @@ exports.findAll = async (req, res) => {
   else if(req.query.pid){
     const id=req.query.id;
     const pid=req.query.pid;
-    contains= await db.sequelize.query('SELECT * FROM RENTS WHERE TID=(:id) AND PID=(:pid)',{
+    contains= await db.sequelize.query('SELECT * FROM PURCHASES WHERE PHID=(:id) AND PID=(:pid)',{
       replacements:{id:req.query.id,
       pid:req.query.pid},
       type: db.sequelize.QueryTypes.SELECT
@@ -49,7 +38,7 @@ exports.findAll = async (req, res) => {
   }
   else if(req.query.id){
     const id=req.query.id;
-    contains= await db.sequelize.query('SELECT * FROM RENTS WHERE TID=(:id)',{
+    contains= await db.sequelize.query('SELECT * FROM PURCHASES WHERE PHID=(:id)',{
       replacements:{id:req.query.id},
       type: db.sequelize.QueryTypes.SELECT
     });
@@ -65,7 +54,7 @@ exports.findAll = async (req, res) => {
 
 exports.findOne = (req, res) => {
     const id = req.query.id;
-    Rent.findByPk(id)
+    Purchase.findByPk(id)
       .then(data => {
         if (data) {
           res.send(data);
@@ -84,17 +73,19 @@ exports.findOne = (req, res) => {
 
 exports.update = async (req, res) => {
     if(req.query.sum){
-        contains= await db.sequelize.query('UPDATE PRODUCTS,RENTS SET PRODUCTS.QUANTITY_RENT=PRODUCTS.QUANTITY_RENT-RENTS.QUANTITY WHERE PRODUCTS.ID=RENTS.PID AND RENTS.TID=(:id)',{
+        contains= await db.sequelize.query('UPDATE PRODUCTS,PURCHASES SET PRODUCTS.QUANTITY_RENT=PRODUCTS.QUANTITY_RENT+PURCHASES.QUANTITY_RENT AND PRODUCTS.QUANTITY_SELL=PRODUCTS.QUANTITY_SELL+PURCHASES.QUANTITY_SELL WHERE PRODUCTS.ID=RENTS.PID AND RENTS.TID=(:id)',{
             replacements:{id:req.query.tid},
             type: db.sequelize.QueryTypes.UPDATE
           });
     }
     else{
         console.log('BATMAN')
-        contains= await db.sequelize.query('UPDATE RENTS SET QUANTITY=(:quantity) WHERE TID=(:tid) AND PID=(:pid)',{
-          replacements:{tid:req.query.tid,
-          quantity:req.query.quantity,
+        contains= await db.sequelize.query('UPDATE PURCHASES SET QUANTITY_SELL=(:quantity_sell) AND QUANTITY_RENT=(:quantity_rent) AND COST_PRICE=(:cost_price) WHERE PHID=(:phid) AND PID=(:pid)',{
+          replacements:{phid:req.query.phid,
+          quantity_rent:req.query.quantity_rent,
+          quantity_sell:req.query.quantity_sell,
         pid:req.query.pid,
+        cost_price:req.query.cost_price
         },
           type: db.sequelize.QueryTypes.UPDATE
         });
@@ -102,8 +93,8 @@ exports.update = async (req, res) => {
 };
 
   exports.delete = async (req, res) => {
-    contains= await db.sequelize.query('DELETE FROM RENTS WHERE TID=(:tid) AND PID=(:pid)',{
-        replacements:{tid:req.query.tid,
+    contains= await db.sequelize.query('DELETE FROM PURCHASES WHERE PHID=(:phid) AND PID=(:pid)',{
+        replacements:{phid:req.query.phid,
       pid:req.query.pid,
       },
         type: db.sequelize.QueryTypes.DELETE

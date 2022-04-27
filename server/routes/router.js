@@ -182,7 +182,7 @@ route.get('/update_purchase_history',(req,res)=>{
 route.get('/purchase',(req,res)=>{
     const id = req.query.id;
     console.log(id);
-    axios.get("http://localhost:3000/api/purchases/",{params:{id:req.query.id}})
+    axios.get("http://localhost:3000/api/purchases?id="+id)
      .then(function(response){
         res.render("purchase",{purchases:response.data,tid:req.query.id});
      })
