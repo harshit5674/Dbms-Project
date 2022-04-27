@@ -4,6 +4,8 @@
   	<title>Table 03</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
 
@@ -41,13 +43,14 @@
       
               <nav id="navbar" class="navbar">
                 <ul>
-                  <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+                  <li><a class="nav-link scrollto " href="/home">Home</a></li>
                   <li><a class="nav-link scrollto" href="#about">About</a></li>
                   <li>
-                    <a class="nav-link scrollto" href="/worker">Worker</a>
+                    <a class="nav-link scrollto active" href="/worker">Worker</a>
                   </li>
-                  <li><a class="nav-link scrollto" href="#portfolio">Customer</a></li>
-                  <li><a class="nav-link scrollto" href="#team">Product</a></li>
+                  <li><a class="nav-link scrollto" href="/transaction">Transactions</a></li>
+                  <li><a class="nav-link scrollto" href="/customer">Customer</a></li>
+                  <li><a class="nav-link scrollto" href="/product">Product</a></li>
                   <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
                   <ul>
                     <li><a href="#">Drop Down 1</a></li>
@@ -66,10 +69,10 @@
                   </ul>
                 </li> -->
                   <li>
-                    <a class="nav-link scrollto" href="#contact">Purchase History</a>
+                    <a class="nav-link scrollto" href="/purchase_history">Purchase History</a>
                   </li>
                   <li>
-                    <a class="getstarted scrollto" href="#about">Logout</a>
+                    <a class="getstarted scrollto" href="/">Logout</a>
                   </li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
@@ -78,20 +81,39 @@
             </div>
           </header>
 	<section class="ftco-section">
+    
+      
+    <style>
+                        
+      .ben {
+        margin: 0;
+        position: absolute;
+        top: 12%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+    </style>
+      <div>
+        <a href="/add-product" class="btn btn-outline-secondary ben" >Add A New Product</a>
+      </div>
+     
+
+   
+    
+    
+  <br>
 		<div class="container">
 			<div class="row justify-content-center">
 				
 			</div>
 			<div class="row">
-				<div class="col-md-12">
-					<a href="/add-customer" class="border-shadow">
-                        <span class="text-gradient">New transaction</span>
-                    </a>
+					
 					<div class="table-wrap">
 						<table class="table">
 					    <thead class="thead-primary">
 					      <tr>
-					        <th>ID</th>
+					        <th>Product ID</th>
 					        <th>Name</th>
 					        <th>Quantity</th>
 					        <th>Selling Price</th>
@@ -106,13 +128,12 @@
                                     <td><%=products[i].name%></td>
                                     <td><%=products[i].quantity%></td>
                                     <td><%=products[i].selling_price%></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><a href="/update_product?id=<%=products[i].id%>" class="btn btn-success">Update</a></td>
+                                    <td><a class="btn btn-danger delete" data-id=<%=products[i].id%>>Delete</a></td>
                                 </tr>
                                 <%}%>
 					    </tbody>
 					  </table>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -121,7 +142,9 @@
 	<script src="js/jquery.min.js"></script>
   <script src="js/popper.js"></script>
   <script src="js/bootstrap.min.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/table_main.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/js/index_1.js"></script> 
 
 	</body>
 </html>

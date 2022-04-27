@@ -1,83 +1,170 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STYLEMART</title>
-    <link  href="css/style.css"  rel="stylesheet" type="text/css" />
-</head>
-<body>
-    <!--Header-->
-    <header id="header">
-        <nav>
-            <div class="container">
-                <div class="text-center">
-                    <a href="/customer" class="nav-brand text-dark">Clothes Management System</a>
-                </div>
+  <head>
+  	<title>Table 03</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="css/table.css">
+    <!-- Vendor CSS Files -->
+    <link href="css/vendor/aos/aos.css" rel="stylesheet" type="text/css"/>
+    <link
+      href="css/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="css/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet" type="text/css"
+    />
+    <link href="css/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link
+      href="css/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link href="css/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="css/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="css/front_end.css" rel="stylesheet" type="text/css"/>
+
+	</head>
+	<body>
+        <header id="header" class="fixed-top">
+            <div class="container d-flex align-items-center">
+              <h1 class="logo me-auto"><a href="#">Style Mart</a></h1>
+              <!-- Uncomment below if you prefer to use an image logo -->
+              <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      
+              <nav id="navbar" class="navbar">
+                <ul>
+                  <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+                  <li><a class="nav-link scrollto" href="#about">About</a></li>
+                  <li>
+                    <a class="nav-link scrollto" href="/worker">Worker</a>
+                  </li>
+                  <li><a class="nav-link scrollto" href="#portfolio">Customer</a></li>
+                  <li><a class="nav-link scrollto" href="#team">Product</a></li>
+                  <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+                  <ul>
+                    <li><a href="#">Drop Down 1</a></li>
+                    <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+                      <ul>
+                        <li><a href="#">Deep Drop Down 1</a></li>
+                        <li><a href="#">Deep Drop Down 2</a></li>
+                        <li><a href="#">Deep Drop Down 3</a></li>
+                        <li><a href="#">Deep Drop Down 4</a></li>
+                        <li><a href="#">Deep Drop Down 5</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#">Drop Down 2</a></li>
+                    <li><a href="#">Drop Down 3</a></li>
+                    <li><a href="#">Drop Down 4</a></li>
+                  </ul>
+                </li> -->
+                  <li>
+                    <a class="nav-link scrollto" href="#contact">Purchase History</a>
+                  </li>
+                  <li>
+                    <a class="getstarted scrollto" href="#about">Logout</a>
+                  </li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+              </nav>
+              <!-- .navbar -->
             </div>
-        </nav>
-    </header>
-
-<main id="int-main">
-    <div class="container">
-        <div class="box-nav d-flex justify-between">
-            <a href="/add-contain?id=<%=tid%>" class="border-shadow">
-                <span class="text-gradient">New customer</span>
-            </a>
-        </div>
-        <br>
-        <form action="/contain" method="POST">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>Transaction ID</th>
-                        <th>Product ID</th>
-                        <th>Quantity</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <% for(var i=0;i < contains.length ;i++){%>
-                    <tr>
-                        <td><%=contains[i].tid%></td>
-                        <td><%=contains[i].pid%></td>
-                        <td><%=contains[i].quantity%></td>
-                        <td>
-                            <a href="/update_contain?id=<%=contains[i].id%>" class="btn border-shadow update">
-                                <span class="text-gradient"></span>
-                            </a>
-                            <a class="btn border-shadow delete" data-id=<%=contains[i].id%>>
-                                <span class="text-gradient"></span>
-                            </a>
-                        </td>
-                    </tr>
-                    <%}%>
-                </tbody>
-            </table>
-        </form>
-        <br>
-        
-        <button onclick="generateBill()">Buy</button>
-        <script>
-            function generateBill() {
-                const queryString = window.location.search;
-                const urlParams = new URLSearchParams(queryString);
-                const id = urlParams.get('id')
-                fetch("http://localhost:3000/api/contains?id="+id+"&sum=1")
-                .then(response => {
-                if(response.ok) {
-                    return response.json();
-    }
-}).then(data => {
-    console.log(data[0])
-                alert("Your Bill Is "+data[0].TOTAL)
-                window.location.href = "/transaction";
-            })
+          </header>
+          <style>
+                        
+            .ben {
+              margin: 0;
+              position: absolute;
+              top: 12%;
+              left: 50%;
+              -ms-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%);
+            }
+          </style>
+            <div>
+              <a href="/add-contain?id=<%=tid%>" class="btn btn-outline-secondary ben" >Add A New Product To Cart</a>
+            </div>
+            <br>
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="table-wrap">
+						<table class="table">
+					    <thead class="thead-primary">
+					      <tr>
+					        <th>Transaction ID</th>
+					        <th>Product Id</th>
+					        <th>Quantity</th>
+					        <th>Update</th>
+					        <th>Delete</th>
+					      </tr>
+					    </thead>
+					    <tbody>
+                            <% for(var i=0;i < contains.length ;i++){%>
+                                <tr>
+                                    <td><%=contains[i].tid%></td>
+                                    <td><%=contains[i].pid%></td>
+                                    <td><%=contains[i].quantity%></td>
+                                    <td><a href="/update_contain?id=<%=contains[i].id%>" class="btn btn-success">Update</a></td>
+                                    <td><a class="btn btn-danger delete" data-id=<%=contains[i].id%>>Delete</a></td>
+                                </tr>
+                                <%}%>
+					    </tbody>
+					  </table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+    <style>          
+        .ben1 {
+          margin: 0;
+          position: relative;
+          top: 12%;
+          left: 50%;
+          -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
         }
-        </script>
-        
-    </div>
-</main>
+      </style>
+    <br>
+    <button class ="btn btn-outline-secondary ben1" onclick="generateBill()">Buy</button>
+    <script>
+        function generateBill() {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const id = urlParams.get('id')
+            fetch("http://localhost:3000/api/contains?id="+id+"&sum=1")
+            .then(response => {
+            if(response.ok) {
+                return response.json();
+}
+}).then(data => {
+console.log(data[0])
+            alert("Your Bill Is "+data[0].TOTAL)
+            window.location.href = "/transaction";
+        })
+    }
+    </script>
 
-<%-include('include/_footer')%>
+	<script src="js/jquery.min.js"></script>
+  <script src="js/popper.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/js/index_1.js"></script> 
+
+
+	</body>
+</html>
+

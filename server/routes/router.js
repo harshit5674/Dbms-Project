@@ -4,8 +4,11 @@ const route=express.Router()
 const controller=require('../controller/product.controller')
 
 const axios = require('axios');
-route.get('/',(req,res)=>{
+route.get('/home',(req,res)=>{
     res.render('landing_page')
+})
+route.get('/',(req,res)=>{
+    res.render('login')
 })
 route.get('/product',(req,res)=>{
     axios.get("http://localhost:3000/api/products/")

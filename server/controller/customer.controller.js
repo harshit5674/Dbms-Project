@@ -58,7 +58,6 @@ exports.findAll = async (req, res) => {
     });
     return res.status(200).json(customers)
   }
-  return res.status(200).json(customers)
   };
 
 exports.findOne = (req, res) => {

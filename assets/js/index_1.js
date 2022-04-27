@@ -181,7 +181,8 @@ $("#update_transaction").submit(function(event){
         "data":data
     }
     $.ajax(request).done(function(response){
-        alert("Product Updated")
+        alert("Transaction Updated")
+        window.location.href = "/transaction";
     })
 })
 
@@ -240,5 +241,6 @@ $("#update_worker").submit(function(event){
     $.ajax(request).done(function(response){
         alert("Worker Updated")
         window.location.href = "/worker";
+
     })
 })
