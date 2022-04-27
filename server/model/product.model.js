@@ -7,7 +7,10 @@ module.exports = (sequelize, Sequelize) => {
       name: {
         type: Sequelize.STRING
       },
-      quantity: {
+      quantity_sell: {
+        type: Sequelize.INTEGER
+      },
+      quantity_rent:{
         type: Sequelize.INTEGER
       },
       selling_price:{

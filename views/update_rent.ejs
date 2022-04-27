@@ -107,51 +107,36 @@
         <div class="wrapper wrapper--w790">
             <div class="card card-5">
                 <div class="card-heading">
-                    <h2 class="title">Add A New Product</h2>
+                    <h2 class="title">Update Cart</h2>
                 </div>
                 <div class="card-body">
-                    <form action="/api/products" method="POST" id="add_product">
-                      <div class="form-row">
-                        <div class="name">Product ID</div>
-                        <div class="value">
+                    <form method="POST" id="update_rent"></form>
+                    <!-- <div class="form-row">
+                        <div class="name">Transaction ID</div>
+                        <div class="value"> -->
                             <div class="input-group">
-                                <input class="input--style-5" type="text" name="id" id="id" placeholder="ID">
-                            </div>
-                        </div>
+                                <input class="input--style-5" type="hidden" name="tid" id="tid" value="<%=tid%>" placeholder="ID">
+                            <!-- </div>
+                        </div> -->
                     </div>
                         <div class="form-row">
-                            <div class="name">Name</div>
+                            <div class="name">Product ID</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-5" type="text" name="name" id="name" placeholder="Name">
+                                    <input class="input--style-5" type="text" name="pid" id="pid" value="<%=rent.cid%>" placeholder="Product ID">
                                 </div>
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="name">Sell Quantity</div>
-                            <div class="value">
-                                <div class="input-group">
-                                    <input class="input--style-5" type="text" name="quantity_sell" id="quantity_sell" placeholder="Sell Quantity">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                          <div class="name">Rent Quantity</div>
+                          <div class="name">Quantity</div>
                           <div class="value">
                               <div class="input-group">
-                                  <input class="input--style-5" type="text" name="quantity_rent" id="quantity_rent" placeholder="Rent Quantity">
-                              </div>
-                          </div>
-                      </div>
-                        <div class="form-row">
-                          <div class="name">Selling Price</div>
-                          <div class="value">
-                              <div class="input-group">
-                                  <input class="input--style-5" type="text" name="selling_price" id="selling_price" placeholder="Selling Price">
+                                  <input class="input--style-5" type="text" name="quantity" id="quantity" value="<%=rent.wid%>" placeholder="Quantity">
                               </div>
                           </div>
                       </div>
                       
+                    
                       <style>
                         
                         .ben {
@@ -164,7 +149,7 @@
                         }
                       </style>
                         <div>
-                          <button type="submit" class="btn btn-outline-secondary ben" >Add A New Product</button>
+                          <button type="submit" class="btn btn-outline-secondary ben" >Update Cart</button>
                         </div>
                     </form>
                 </div>

@@ -7,9 +7,9 @@ module.exports = app => {
     // Retrieve a single Tutorial with id
     router.get("/:id", contains.findOne);
     // Update a Tutorial with id
-    router.put("/:id", contains.update);
+    router.put("/", contains.update);
     // Delete a Tutorial with id
-    router.delete("/:id", contains.delete);
+    router.delete("/", contains.delete);
     // Delete all Tutorials
     router.delete("/", contains.deleteAll);
     app.use('/api/contains', router);

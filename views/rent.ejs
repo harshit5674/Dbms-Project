@@ -89,7 +89,7 @@
             }
           </style>
             <div>
-              <a href="/add-contain?id=<%=tid%>" class="btn btn-outline-secondary ben" >Add A New Product To Cart</a>
+              <a href="/add-rent?id=<%=tid%>" class="btn btn-outline-secondary ben" >Add A New Product To Cart</a>
             </div>
             <br>
 	<section class="ftco-section">
@@ -103,7 +103,7 @@
 						<table class="table">
 					    <thead class="thead-primary">
 					      <tr>
-					        <th>Transaction ID</th>
+					        <th>Rental ID</th>
 					        <th>Product Id</th>
 					        <th>Quantity</th>
 					        <th>Update</th>
@@ -111,13 +111,13 @@
 					      </tr>
 					    </thead>
 					    <tbody>
-                            <% for(var i=0;i < contains.length ;i++){%>
+                            <% for(var i=0;i < rents.length ;i++){%>
                                 <tr>
-                                    <td><%=contains[i].tid%></td>
-                                    <td><%=contains[i].pid%></td>
-                                    <td><%=contains[i].quantity%></td>
-                                    <td><a href="/update_contain?id=<%=contains[i].tid%>&pid=<%=contains[i].pid%>" class="btn btn-success">Update</a></td>
-                                    <td><button class="btn btn-danger" onclick="delete_all(<%=contains[i].tid%>,<%=contains[i].pid%>)">Delete</button></td>
+                                    <td><%=rents[i].tid%></td>
+                                    <td><%=rents[i].pid%></td>
+                                    <td><%=rents[i].quantity%></td>
+                                    <td><a href="/update_rent?id=<%=rents[i].id%>" class="btn btn-success">Update</a></td>
+                                    <td><a class="btn btn-danger delete" data-id=<%=rents[i].id%>>Delete</a></td>
                                 </tr>
                                 <%}%>
 					    </tbody>
@@ -138,35 +138,21 @@
         }
       </style>
     <br>
-    <button onclick="generateBill()" class ="btn btn-outline-secondary ben1" >Buy</button>
+    <button class ="btn btn-outline-secondary ben1" onclick="generateBill()">Rent</button>
     <script>
-      function generateBill() {
-          const queryString = window.location.search;
-          const urlParams = new URLSearchParams(queryString);
-          const id = urlParams.get('id')
-          fetch("http://localhost:3000/api/contains?id="+id+"&sum=1")
-          .then(response => {
-          if(response.ok) {
-              return response.json();
+        function generateBill() {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const id = urlParams.get('id')
+            fetch("http://localhost:3000/api/rents?id="+id+"&sum=1")
+            .then(response => {
+            if(response.ok) {
+                alert("The Product In The Cart Are Rented!")
+                window.location.href = "http://localhost:3000/rental"
 }
-}).then(data => {
-console.log(data[0])
-          alert("Your Bill Is "+data[0].TOTAL)
-          window.location.href = "/transaction";
-      })
-  }
-  function delete_all(tid,pid){
-    console.log('IN');
-    var request={
-              "url": 'http://localhost:3000/api/contains?tid='+tid+'&pid='+pid,
-              "method":"DELETE",
-          }
-    $.ajax(request).done(function(response){
-          })
-      alert('Item would be Deleted')
-      window.location.href = "/contain?id="+tid;
-  }
-  </script>
+})
+    }
+    </script>
 
 	<script src="js/jquery.min.js"></script>
   <script src="js/popper.js"></script>

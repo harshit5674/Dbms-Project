@@ -1,3 +1,4 @@
+const { reset } = require("nodemon");
 const db = require("../model");
 const Contain = db.contains;
 const Op = db.Sequelize.Op;
@@ -30,7 +31,7 @@ exports.create = (req, res) => {
 exports.findAll = async (req, res) => {
   if(req.query.sum){
     const id=req.query.id;
-      contains= await db.sequelize.query('UPDATE PRODUCTS,CONTAINS SET PRODUCTS.QUANTITY=PRODUCTS.QUANTITY-CONTAINS.QUANTITY WHERE PRODUCTS.ID=CONTAINS.PID AND CONTAINS.TID=(:id)',{
+      contains= await db.sequelize.query('UPDATE PRODUCTS,CONTAINS SET PRODUCTS.QUANTITY_SELL=PRODUCTS.QUANTITY_SELL-CONTAINS.QUANTITY WHERE PRODUCTS.ID=CONTAINS.PID AND CONTAINS.TID=(:id)',{
         replacements:{id:req.query.id},
         type: db.sequelize.QueryTypes.UPDATE
       });
@@ -39,6 +40,16 @@ exports.findAll = async (req, res) => {
        type: db.sequelize.QueryTypes.SELECT
      });
   return res.status(200).json(sums)
+  }
+  else if(req.query.pid){
+    const id=req.query.id;
+    const pid=req.query.pid;
+    contains= await db.sequelize.query('SELECT * FROM CONTAINS WHERE TID=(:id) AND PID=(:pid)',{
+      replacements:{id:req.query.id,
+      pid:req.query.pid},
+      type: db.sequelize.QueryTypes.SELECT
+    });
+  return res.status(200).json(contains)
   }
   else if(req.query.id){
     const id=req.query.id;
@@ -75,51 +86,24 @@ exports.findOne = (req, res) => {
       });
 };    
 
-exports.update = (req, res) => {
-    const id = req.params.id;
-    console.log(id);
-    Contain.update(req.body, {
-      where: { id: id }
-    })
-      .then(num => {
-        if (num == 1) {
-          res.send({
-            message: "Tutorial was updated successfully."
-          });
-        } else {
-          res.send({
-            message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found or req.body is empty!`
-          });
-        }
-      })
-      .catch(err => {
-        res.status(500).send({
-          message: "Error updating Tutorial with id=" + id
-        });
-      });
+exports.update = async (req, res) => {
+  console.log('BATMAN')
+    contains= await db.sequelize.query('UPDATE CONTAINS SET QUANTITY=(:quantity) WHERE TID=(:tid) AND PID=(:pid)',{
+      replacements:{tid:req.query.tid,
+      quantity:req.query.quantity,
+    pid:req.query.pid,
+    },
+      type: db.sequelize.QueryTypes.UPDATE
+    });
 };
 
-  exports.delete = (req, res) => {
-    const id = req.params.id;
-    Contain.destroy({
-      where: { id: id }
-    })
-      .then(num => {
-        if (num == 1) {
-          res.send({
-            message: "Tutorial was deleted successfully!"
-          });
-        } else {
-          res.send({
-            message: `Cannot delete Tutorial with id=${id}. Maybe Tutorial was not found!`
-          });
-        }
-      })
-      .catch(err => {
-        res.status(500).send({
-          message: "Could not delete Tutorial with id=" + id
-        });
-      });
+  exports.delete = async (req, res) => {
+    contains= await db.sequelize.query('DELETE FROM CONTAINS WHERE TID=(:tid) AND PID=(:pid)',{
+      replacements:{tid:req.query.tid,
+    pid:req.query.pid,
+    },
+      type: db.sequelize.QueryTypes.DELETE
+    });
   };
 
   exports.deleteAll = (req, res) => {

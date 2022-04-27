@@ -1,5 +1,5 @@
 const db = require("../model");
-const Product = db.products;
+const Rent = db.rents;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
@@ -9,18 +9,16 @@ exports.create = (req, res) => {
         });
         return;
       }*/
-      const  product= {
-        id: req.body.id,
-        name: req.body.name,
-        quantity_sell: req.body.quantity_sell,
-        quantity_rent: req.body.quantity_rent,
-        selling_price :req.body.selling_price
+      const  rent= {
+        tid: req.body.tid,
+        pid: req.body.pid,
+        quantity: req.body.quantity,
       };
       // Save Tutorial in the database
-      Product.create(product)
+      Rent.create(rent)
         .then(data => {
           //res.send(data);
-          res.redirect("/add-product");
+          res.redirect("/add-rent");
         })
         .catch(err => {
           res.status(500).send({
@@ -30,36 +28,32 @@ exports.create = (req, res) => {
         });
 };
 exports.findAll = async (req, res) => {
-  if(req.query.id){
-    const id = req.query.id;
-    products= await db.sequelize.query('SELECT * FROM PRODUCTS WHERE ID=(:id)',{
+  if(req.query.sum){
+    const id=req.query.id;
+      rents= await db.sequelize.query('UPDATE PRODUCTS,RENTS SET PRODUCTS.QUANTITY_RENT=PRODUCTS.QUANTITY_RENT-CONTAINS.QUANTITY WHERE PRODUCTS.ID=CONTAINS.PID AND CONTAINS.TID=(:id)',{
+        replacements:{id:req.query.id},
+        type: db.sequelize.QueryTypes.UPDATE
+      });
+  }
+  else if(req.query.id){
+    const id=req.query.id;
+    contains= await db.sequelize.query('SELECT * FROM RENTS WHERE TID=(:id)',{
       replacements:{id:req.query.id},
       type: db.sequelize.QueryTypes.SELECT
     });
-    console.log(products)
-    return res.status(200).json(products)
+  return res.status(200).json(contains)
   }
   else{
-    const title = req.query.title;
-    console.log(req.query.title)
-    var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
-    Product.findAll({ where: condition })
-      .then(data => {
-        res.send(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving tutorials."
-        });
-      });
+    contains= await db.sequelize.query('SELECT * FROM RENTS ',{
+      type: db.sequelize.QueryTypes.SELECT
+    });
+  return res.status(200).json(contains)
   }
   };
 
 exports.findOne = (req, res) => {
-  console.log('Lo')
     const id = req.query.id;
-    Product.findByPk(id)
+    Rent.findByPk(id)
       .then(data => {
         if (data) {
           res.send(data);
@@ -79,7 +73,7 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
     const id = req.params.id;
     console.log(id);
-    Product.update(req.body, {
+    Rent.update(req.body, {
       where: { id: id }
     })
       .then(num => {
@@ -102,7 +96,7 @@ exports.update = (req, res) => {
 
   exports.delete = (req, res) => {
     const id = req.params.id;
-    Product.destroy({
+    Rent.destroy({
       where: { id: id }
     })
       .then(num => {
@@ -124,7 +118,7 @@ exports.update = (req, res) => {
   };
 
   exports.deleteAll = (req, res) => {
-    Product.destroy({
+    Rental.destroy({
       where: {},
       truncate: false
     })

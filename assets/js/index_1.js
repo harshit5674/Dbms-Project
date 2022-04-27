@@ -79,9 +79,9 @@ $("#add_contains").submit(function(event){
 }).then(data => {
         console.log('Batman')
         console.log(data);
-        console.log(data[0].quantity)
-        td=data[0].quantity
-        if(q<=data[0].quantity){
+        console.log(data[0].quantity_sell)
+        td=data[0].quantity_sell
+        if(q<=data[0].quantity_sell){
             var request={
                 "url": 'http://localhost:3000/api/contains/',
                 "method":"POST",
@@ -95,6 +95,47 @@ $("#add_contains").submit(function(event){
             alert("Not Enough Quantity")
             
             window.location.href = "/contain?id="+data1.tid;
+        }
+}).catch(err => console.error(err));
+    console.log('q='+q)
+    console.log(td)
+
+
+    
+})
+$("#add_rents").submit(function(event){
+    event.preventDefault();
+    var unindexed_array = $(this).serializeArray();
+    var data1={};
+    console.log('HI');
+    $.map(unindexed_array,function(n,i){
+        data1[n['name']]=n['value']
+    })
+    const q=data1.quantity
+    var td=1
+    fetch("http://localhost:3000/api/products?id="+data1.pid)
+.then(response => {
+    if(response.ok) {
+        return response.json();
+    }
+}).then(data => {
+        console.log('Batman')
+        console.log(data);
+        console.log(data[0].quantity)
+        td=data[0].quantity
+        if(q<=data[0].quantity){
+            var request={
+                "url": 'http://localhost:3000/api/rents/',
+                "method":"POST",
+                "data":data1
+            }
+            $.ajax(request).done(function(response){
+               window.location.href = "/rent?id="+data1.tid;
+            })
+        }
+        else{
+            alert("Not Enough Quantity")
+            window.location.href = "/rent?id="+data1.tid;
         }
 }).catch(err => console.error(err));
     console.log('q='+q)
@@ -124,6 +165,42 @@ $("#update_product").submit(function(event){
          window.location.href = "/product";
 
     })
+})
+$("#update_contain").submit(function(event){
+  console.log('Plwase WOek')
+  event.preventDefault();
+  var unindexed_array = $(this).serializeArray();
+  var data1={};
+  console.log('HI');
+  $.map(unindexed_array,function(n,i){
+      data1[n['name']]=n['value']
+  })
+  const q=data1.quantity
+  var td=1
+  fetch("http://localhost:3000/api/products?id="+data1.pid)
+.then(response => {
+  if(response.ok) {
+      return response.json();
+  }
+}).then(data => {
+      console.log('Batman')
+      console.log(data);
+      if(q<=data[0].quantity_sell){
+          var request={
+              "url": 'http://localhost:3000/api/contains?tid='+data1.tid+'&pid='+data1.pid,
+              "method":"PUT",
+              "data":data1
+          }
+          $.ajax(request).done(function(response){
+             window.location.href = "/contain?id="+data1.tid;
+          })
+      }
+      else{
+          alert("Not Enough Quantity")
+          
+          window.location.href = "/contain?id="+data1.tid;
+      }
+}).catch(err => console.error(err));
 })
 
 if(window.location.pathname=="/product"){

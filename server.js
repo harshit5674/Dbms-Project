@@ -25,7 +25,7 @@ require("./server/routes/rental.routes")(app);
 
 
 const db=require("./server/model");
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync().then(() => {
     console.log("Drop and re-sync db.");
   })
 app.listen(PORT,()=>{

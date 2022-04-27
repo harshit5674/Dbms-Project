@@ -98,13 +98,38 @@ route.get('/add-contain',(req,res)=>{
     res.render("add_contain",{tid:req.query.id});
 })
 route.get('/update_contain',(req,res)=>{
+    axios.get("http://localhost:3000/api/contains?id="+req.query.id+"&pid="+req.query.pid)
+    .then(function(productdata){
+        console.log(productdata);
+        console.log(productdata.data);
+        console.log('HI');
+        res.render("update_contain",{contain:productdata.data,tid:req.query.id});
+    })
+})
+route.get('/rent',(req,res)=>{
+    const id = req.query.id;
+    console.log(id);
+    axios.get("http://localhost:3000/api/rents/",{params:{id:req.query.id}})
+     .then(function(response){
+        res.render("rent",{rents:response.data,tid:req.query.id});
+     })
+    .catch(err=>{
+        res.send(err);
+    })
+})
+route.get('/add-rent',(req,res)=>{
+    const id=req.query.id;
+    console.log(id)
+    res.render("add_rent",{tid:req.query.id});
+})
+route.get('/update_rent',(req,res)=>{
     const id=req.params.id;
     console.log(id);
-    axios.get('http://localhost:3000/api/contains/',{params:{id:req.query.id}})
+    axios.get('http://localhost:3000/api/rents/',{params:{id:req.query.id}})
     .then(function(productdata){
         console.log(id);
         console.log(productdata.data)
-        res.render("update_contains",{contain:productdata.data});
+        res.render("update_rent",{rent:productdata.data,tid:req.query.id});
     })
 })
 route.get('/transaction',(req,res)=>{
