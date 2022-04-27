@@ -12,5 +12,5 @@ module.exports = app => {
     router.delete("/:id", rentals.delete);
     // Delete all Tutorials
     router.delete("/", rentals.deleteAll);
-    app.use('/api/transactions', router);
+    app.use('/api/rentals', router);
   };

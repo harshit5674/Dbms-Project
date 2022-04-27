@@ -77,6 +77,21 @@
               <!-- .navbar -->
             </div>
           </header>
+          <style>
+                        
+            .ben {
+              margin: 0;
+              position: absolute;
+              top: 12%;
+              left: 50%;
+              -ms-transform: translate(-50%, -50%);
+              transform: translate(-50%, -50%);
+            }
+          </style>
+            <div>
+              <a href="/add-rental" class="btn btn-outline-secondary ben" >Add A New Rental</a>
+            </div>
+            <br>
 	<section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
@@ -84,18 +99,15 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<a href="/add-rental" class="border-shadow">
-                        <span class="text-gradient">New Rental</span>
-                    </a>
 					<div class="table-wrap">
 						<table class="table">
 					    <thead class="thead-primary">
 					      <tr>
 					        <th>Rental ID</th>
-					        <th>Start Date</th>
-                            <th>Return Date</th>
+					        <th>Issued Date</th>
+					        <th>Return Date</th>
 					        <th>Customer ID</th>
-					        <th>Worker ID</th>
+                  <th>Worker ID</th>
 					        <th>Update</th>
 					        <th>Delete</th>
 					      </tr>
@@ -108,8 +120,8 @@
                                     <td><%=rentals[i].r_date%></td>
                                     <td><%=rentals[i].cid%></td>
                                     <td><%=rentals[i].wid%></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td><a href="/update_rental?id=<%=rentals[i].id%>" class="btn btn-success">Update</a></td>
+                                    <td><a class="btn btn-danger delete" data-id=<%=rentals[i].id%>>Delete</a></td>
                                 </tr>
                                 <%}%>
 					    </tbody>
@@ -124,6 +136,9 @@
   <script src="js/popper.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/js/index_1.js"></script> 
+
 
 	</body>
 </html>

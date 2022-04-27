@@ -19,6 +19,7 @@ require("./server/routes/customer.routes")(app);
 require("./server/routes/transaction.routes")(app);
 require("./server/routes/worker.routes")(app);
 require("./server/routes/contain.routes")(app);
+require("./server/routes/rental.routes")(app);
 
 
 

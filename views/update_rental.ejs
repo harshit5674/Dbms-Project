@@ -1,45 +1,191 @@
-<%-include('include/_header')%>
+<!DOCTYPE html>
+<html lang="en">
 
-<main id="int-main">
-    <div class="container">
-        <div class="box-nav d-flex justify-between">
-            <div class="filter">
-        
-                <a href="/rental">All Rentals</a>
-            </div>
-        </div>
-        <div class="form-title text-center">
-            <h2 class="text-dark">Update Rental</h2>
-            <span class="text-dark">Use the below form to add new rental</span>
-        </div>
-        <form method="POST" id="update_rental">
-            <div class="new_product">
-                <div class="form-group">
-                    <label for="id" class="text-dark">ID</label>
-                    <input type="text" name="id" id="id" value="<%=rental.id%>" placeholder="ID">
-                </div>
-                <div class="form-group">
-                    <label for="name" class="text-dark">Start Date</label>
-                    <input type="text" name="s_date" id="s_date" value="<%=rental.date%>" placeholder="Date">
-                </div>
-                <div class="form-group">
-                    <label for="name" class="text-dark">Return Date</label>
-                    <input type="text" name="r_date" id="r_date" value="<%=rental.date%>" placeholder="Date">
-                </div>
-                <div class="form-group">
-                    <label for="cid" class="text-dark">Customer ID</label>
-                    <input type="text" name="cid" id="cid" value="<%=rental.cid%>" placeholder="Customer ID">
-                </div>
-                <div class="form-group">
-                    <label for="wid" class="text-dark">Worker ID</label>
-                    <input type="text" name="wid" id="wid" value="<%=rental.wid%>" placeholder="Worker ID">
-                </div>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn text-dark update">Save</button>
-            </div>
-        </form>
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>STYLEMART</title>
+
+    <!-- Icons font CSS-->
+    <link href="css/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="css/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="css/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="css/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="css/main.css" rel="stylesheet" media="all">
+    <link href="img/favicon.ico" rel="icon" />
+    <link href="img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link href="css/vendor/aos/aos.css" rel="stylesheet" type="text/css"/>
+    <link
+      href="css/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="css/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet" type="text/css"
+    />
+    <link href="css/vendor/boxicons/css/boxicons.min.css" rel="stylesheet" />
+    <link
+      href="css/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link href="css/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="css/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link href="css/front_end.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+      <h1 class="logo me-auto"><a href="#">Style Mart</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto " href="/home">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li>
+            <a class="nav-link scrollto active" href="/worker">Worker</a>
+          </li>
+          <li><a class="nav-link scrollto" href="/transaction">Transactions</a></li>
+          <li><a class="nav-link scrollto" href="/customer">Customer</a></li>
+          <li><a class="nav-link scrollto" href="/product">Product</a></li>
+          <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a href="#">Drop Down 1</a></li>
+            <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+              <ul>
+                <li><a href="#">Deep Drop Down 1</a></li>
+                <li><a href="#">Deep Drop Down 2</a></li>
+                <li><a href="#">Deep Drop Down 3</a></li>
+                <li><a href="#">Deep Drop Down 4</a></li>
+                <li><a href="#">Deep Drop Down 5</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Drop Down 2</a></li>
+            <li><a href="#">Drop Down 3</a></li>
+            <li><a href="#">Drop Down 4</a></li>
+          </ul>
+        </li> -->
+          <li>
+            <a class="nav-link scrollto" href="/purchase_history">Purchase History</a>
+          </li>
+          <li>
+            <a class="getstarted scrollto" href="/">Logout</a>
+          </li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
+      <!-- .navbar -->
     </div>
-</main>
+  </header>
+  <br>
+  <br>
+    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790">
+            <div class="card card-5">
+                <div class="card-heading">
+                    <h2 class="title">Update Rental</h2>
+                </div>
+                <div class="card-body">
+                    <form method="POST" id="update_rental">
+                      <div class="form-row">
+                        <div class="name">ID</div>
+                        <div class="value">
+                            <div class="input-group">
+                                <input class="input--style-5" type="text" name="id" id="id" value="<%=rentals.id%>" placeholder="ID">
+                            </div>
+                        </div>
+                    </div>
+                        <div class="form-row">
+                            <div class="name">Issued Date</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-5" type="date" name="s_date" id="s_date" value="<%=rentals.s_date%>" placeholder="Issued Date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Return Date</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-5" type="date" name="r_date" id="r_date" value="<%=rentals.r_date%>" placeholder="Return Date">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="name">Customer ID</div>
+                            <div class="value">
+                                <div class="input-group">
+                                    <input class="input--style-5" type="text" name="cid" id="cid" value="<%=rentals.cid%>" placeholder="Customer ID">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                          <div class="name">Worker ID</div>
+                          <div class="value">
+                              <div class="input-group">
+                                  <input class="input--style-5" type="text" name="wid" id="wid" value="<%=rentals.wid%>" placeholder="Worker ID">
+                              </div>
+                          </div>
+                      </div>
+                      
+                    
+                      <style>
+                        
+                        .ben {
+                          margin: 0;
+                          position: absolute;
+                          top: 91%;
+                          left: 50%;
+                          -ms-transform: translate(-50%, -50%);
+                          transform: translate(-50%, -50%);
+                        }
+                      </style>
+                        <div>
+                          <button type="submit" class="btn btn-outline-secondary ben" >Update Rental</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<%-include('include/_footer')%>
+    <!-- Jquery JS-->
+    <script src="js/vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="js/vendor/select2/select2.min.js"></script>
+    <script src="js/vendor/datepicker/moment.min.js"></script>
+    <script src="js/vendor/datepicker/daterangepicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/js/index_1.js"></script>
+
+    <!-- Main JS-->
+    <script src="js/global.js"></script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->

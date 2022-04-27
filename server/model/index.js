@@ -20,6 +20,6 @@ db.customers = require("./customer.model.js")(sequelize, Sequelize);
 db.workers = require("./worker.model.js")(sequelize, Sequelize);
 db.transactions = require("./transaction.model.js")(sequelize, Sequelize);
 db.contains = require("./contain.model.js")(sequelize, Sequelize);
-
+db.rentals = require("./rental.model.js")(sequelize, Sequelize);
 
 module.exports = db;

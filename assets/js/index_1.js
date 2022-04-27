@@ -40,6 +40,26 @@ $("#add_transaction").submit(function(event){
         window.location.href = "/contain"+"?id="+data.id;
     })
 })
+$("#add_rental").submit(function(event){
+    event.preventDefault();
+    var unindexed_array = $(this).serializeArray();
+    var data={};
+    console.log('HI');
+    $.map(unindexed_array,function(n,i){
+        data[n['name']]=n['value']
+    })
+    console.log(data)
+    var id=data.id
+    console.log(id)
+    var request={
+        "url": 'http://localhost:3000/api/rentals/',
+        "method":"POST",
+        "data":data
+    }
+    $.ajax(request).done(function(response){
+        window.location.href = "/rent"+"?id="+data.id;
+    })
+})
 
 $("#add_contains").submit(function(event){
     event.preventDefault();
@@ -185,6 +205,27 @@ $("#update_transaction").submit(function(event){
         window.location.href = "/transaction";
     })
 })
+$("#update_rental").submit(function(event){
+    event.preventDefault();
+    var unindexed_array = $(this).serializeArray();
+    var data={};
+    console.log('HI');
+    $.map(unindexed_array,function(n,i){
+        data[n['name']]=n['value']
+    })
+    console.log(data)
+    var id=data.id
+    console.log(id)
+    var request={
+        "url": 'http://localhost:3000/api/rentals/'+data.id,
+        "method":"PUT",
+        "data":data
+    }
+    $.ajax(request).done(function(response){
+        alert("Rental Updated")
+        window.location.href = "/rental";
+    })
+})
 
 if(window.location.pathname=="/transaction"){
     $ondelete=$(".table tbody td a.delete")
@@ -199,6 +240,23 @@ if(window.location.pathname=="/transaction"){
         $.ajax(request).done(function(response){
         alert("Data Deleted succesfully");
         window.location.href = "/transaction";
+    })
+    }
+    })
+}
+if(window.location.pathname=="/rental"){
+    $ondelete=$(".table tbody td a.delete")
+    $ondelete.click(function(){
+        var id=$(this).attr("data-id")
+        var request={
+        "url": 'http://localhost:3000/api/rentals/'+id,
+        "method":"DELETE",
+    }
+
+    if(confirm("The selected rental will be deleted.")){
+        $.ajax(request).done(function(response){
+        alert("Data Deleted succesfully");
+        window.location.href = "/rental";
     })
     }
     })

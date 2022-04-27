@@ -1,5 +1,5 @@
 const db = require("../model");
-const Transaction = db.transactions;
+const Rental = db.rentals;
 const Op = db.Sequelize.Op;
 const axios=require('axios')
 
@@ -15,8 +15,7 @@ exports.create = (req, res) => {
         s_date: req.body.s_date,
         r_date: req.body.r_date,
         cid: req.body.cid,
-        wid :req.body.wid
-        
+        wid :req.body.wid      
       };
       Rental.create(rental)
         .then(data => {

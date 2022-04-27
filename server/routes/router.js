@@ -34,6 +34,30 @@ route.get('/update_product',(req,res)=>{
         res.render("update_product",{product:productdata.data});
     })
 })
+route.get('/rental',(req,res)=>{
+    axios.get("http://localhost:3000/api/rentals/")
+     .then(function(response){
+        res.render("rental",{rentals:response.data});
+     })
+    .catch(err=>{
+        res.send(err);
+    })
+})
+route.get('/add-rental',(req,res)=>{
+    res.render("add_rental");
+})
+route.get('/update_rental',(req,res)=>{
+    const id=req.params.id;
+    console.log(id);
+    params:{id:req.params.id};
+    axios.get('http://localhost:3000/api/rentals',{params:{id:req.query.id}})
+    .then(function(productdata){
+        const id=req.query.id;
+        console.log(id);
+        console.log(productdata.data)
+        res.render("update_rental",{rentals:productdata.data});
+    })
+})
 route.get('/customer',(req,res)=>{
     axios.get("http://localhost:3000/api/customers/")
      .then(function(response){
