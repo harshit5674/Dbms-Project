@@ -103,7 +103,7 @@
 						<table class="table">
 					    <thead class="thead-primary">
 					      <tr>
-					        <th>Rental ID</th>
+					        <th>Transaction ID</th>
 					        <th>Product Id</th>
 					        <th>Quantity</th>
 					        <th>Update</th>
@@ -116,8 +116,8 @@
                                     <td><%=rents[i].tid%></td>
                                     <td><%=rents[i].pid%></td>
                                     <td><%=rents[i].quantity%></td>
-                                    <td><a href="/update_rent?id=<%=rents[i].id%>" class="btn btn-success">Update</a></td>
-                                    <td><a class="btn btn-danger delete" data-id=<%=rents[i].id%>>Delete</a></td>
+                                    <td><a href="/update_rent?id=<%=rents[i].tid%>&pid=<%=rents[i].pid%>" class="btn btn-success">Update</a></td>
+                                    <td><button class="btn btn-danger" onclick="delete_all(<%=rents[i].tid%>,<%=rents[i].pid%>)">Delete</button></td>
                                 </tr>
                                 <%}%>
 					    </tbody>
@@ -138,21 +138,33 @@
         }
       </style>
     <br>
-    <button class ="btn btn-outline-secondary ben1" onclick="generateBill()">Rent</button>
+    <button onclick="generateBill()" class ="btn btn-outline-secondary ben1" >Buy</button>
     <script>
-        function generateBill() {
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            const id = urlParams.get('id')
-            fetch("http://localhost:3000/api/rents?id="+id+"&sum=1")
-            .then(response => {
-            if(response.ok) {
-                alert("The Product In The Cart Are Rented!")
-                window.location.href = "http://localhost:3000/rental"
-}
-})
-    }
-    </script>
+      function generateBill() {
+          const queryString = window.location.search;
+          const urlParams = new URLSearchParams(queryString);
+          const tid = urlParams.get('id')
+          var request={
+              "url": 'http://localhost:3000/api/rents?tid='+tid+'&sum=1',
+              "method":"PUT",
+          }
+    $.ajax(request).done(function(response){
+          })
+      alert('All Items Are Issued')
+      window.location.href = "/rental";
+  }
+  function delete_all(tid,pid){
+    console.log('IN');
+    var request={
+              "url": 'http://localhost:3000/api/rents?tid='+tid+'&pid='+pid,
+              "method":"DELETE",
+          }
+    $.ajax(request).done(function(response){
+          })
+      alert('Item would be Deleted')
+      window.location.href = "/rent?id="+tid;
+  }
+  </script>
 
 	<script src="js/jquery.min.js"></script>
   <script src="js/popper.js"></script>

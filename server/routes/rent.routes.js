@@ -1,5 +1,5 @@
 module.exports = app => {
-    const contains = require("../controller/rent.controller.js");
+    const rents = require("../controller/rent.controller.js");
     var router = require("express").Router();
     router.post("/", rents.create);
     // Retrieve all Tutorials
@@ -7,10 +7,9 @@ module.exports = app => {
     // Retrieve a single Tutorial with id
     router.get("/:id", rents.findOne);
     // Update a Tutorial with id
-    router.put("/:id", rents.update);
+    router.put("/", rents.update);
     // Delete a Tutorial with id
-    router.delete("/:id", rents.delete);
+    router.delete("/", rents.delete);
     // Delete all Tutorials
-    router.delete("/", rents.deleteAll);
     app.use('/api/rents', router);
   };

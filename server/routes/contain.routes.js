@@ -11,6 +11,5 @@ module.exports = app => {
     // Delete a Tutorial with id
     router.delete("/", contains.delete);
     // Delete all Tutorials
-    router.delete("/", contains.deleteAll);
     app.use('/api/contains', router);
   };

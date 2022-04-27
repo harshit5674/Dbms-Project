@@ -110,7 +110,7 @@
                     <h2 class="title">Update Cart</h2>
                 </div>
                 <div class="card-body">
-                    <form method="POST" id="update_rent"></form>
+                  <form method="POST" id="update_rent" ></form>
                     <!-- <div class="form-row">
                         <div class="name">Transaction ID</div>
                         <div class="value"> -->
@@ -123,7 +123,7 @@
                             <div class="name">Product ID</div>
                             <div class="value">
                                 <div class="input-group">
-                                    <input class="input--style-5" type="text" name="pid" id="pid" value="<%=rent.cid%>" placeholder="Product ID">
+                                    <input class="input--style-5" type="text" name="pid" id="pid" value="<%=rent[0].pid%>" placeholder="Product ID">
                                 </div>
                             </div>
                         </div>
@@ -131,7 +131,7 @@
                           <div class="name">Quantity</div>
                           <div class="value">
                               <div class="input-group">
-                                  <input class="input--style-5" type="text" name="quantity" id="quantity" value="<%=rent.wid%>" placeholder="Quantity">
+                                  <input class="input--style-5" type="text" name="quantity" id="quantity" value="<%=rent[0].quantity%>" placeholder="Quantity">
                               </div>
                           </div>
                       </div>
@@ -149,22 +149,54 @@
                         }
                       </style>
                         <div>
-                          <button type="submit" class="btn btn-outline-secondary ben" >Update Cart</button>
+                          <button onclick="solve()" class="btn btn-outline-secondary ben" >Update Cart</button>
                         </div>
+            <script>
+              function solve(){
+                console.log('Plwase WOek')
+                var tid = document.getElementById("tid").value;
+                var pid = document.getElementById("pid").value;
+                var quantity = document.getElementById("quantity").value;
+  fetch("http://localhost:3000/api/products?id="+pid)
+.then(response => {
+  if(response.ok) {
+      return response.json();
+  }
+}).then(data => {
+      console.log('Batman')
+      console.log(quantity)
+      console.log(data);
+      
+      if(quantity<=data[0].quantity_rent){
+          var request={
+              "url": 'http://localhost:3000/api/rents?tid='+tid+'&pid='+pid+'&quantity='+quantity,
+              "method":"PUT",
+          }
+          $.ajax(request).done(function(response){
+          })
+      }
+      else{
+          alert("Not Enough Quantity")
+          window.location.href = "/rent?id="+tid;
+      }
+      window.location.href = "/rent?id="+tid;
+}).catch(err => console.error(err));
+              }
+            </script>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/js/index_1.js"></script>  
     <!-- Jquery JS-->
     <script src="js/vendor/jquery/jquery.min.js"></script>
     <!-- Vendor JS-->
     <script src="js/vendor/select2/select2.min.js"></script>
     <script src="js/vendor/datepicker/moment.min.js"></script>
     <script src="js/vendor/datepicker/daterangepicker.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="/js/index_1.js"></script>
+   
 
     <!-- Main JS-->
     <script src="js/global.js"></script>

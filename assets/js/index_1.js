@@ -123,7 +123,7 @@ $("#add_rents").submit(function(event){
         console.log(data);
         console.log(data[0].quantity)
         td=data[0].quantity
-        if(q<=data[0].quantity){
+        if(q<=data[0].quantity_rent){
             var request={
                 "url": 'http://localhost:3000/api/rents/',
                 "method":"POST",

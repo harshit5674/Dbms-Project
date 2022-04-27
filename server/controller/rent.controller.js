@@ -35,6 +35,16 @@ exports.findAll = async (req, res) => {
         type: db.sequelize.QueryTypes.UPDATE
       });
   }
+  else if(req.query.pid){
+    const id=req.query.id;
+    const pid=req.query.pid;
+    contains= await db.sequelize.query('SELECT * FROM RENTS WHERE TID=(:id) AND PID=(:pid)',{
+      replacements:{id:req.query.id,
+      pid:req.query.pid},
+      type: db.sequelize.QueryTypes.SELECT
+    });
+  return res.status(200).json(contains)
+  }
   else if(req.query.id){
     const id=req.query.id;
     contains= await db.sequelize.query('SELECT * FROM RENTS WHERE TID=(:id)',{
@@ -70,50 +80,32 @@ exports.findOne = (req, res) => {
       });
 };    
 
-exports.update = (req, res) => {
-    const id = req.params.id;
-    console.log(id);
-    Rent.update(req.body, {
-      where: { id: id }
-    })
-      .then(num => {
-        if (num == 1) {
-          res.send({
-            message: "Tutorial was updated successfully."
+exports.update = async (req, res) => {
+    if(req.query.sum){
+        contains= await db.sequelize.query('UPDATE PRODUCTS,RENTS SET PRODUCTS.QUANTITY_RENT=PRODUCTS.QUANTITY_RENT-RENTS.QUANTITY WHERE PRODUCTS.ID=RENTS.PID AND RENTS.TID=(:id)',{
+            replacements:{id:req.query.tid},
+            type: db.sequelize.QueryTypes.UPDATE
           });
-        } else {
-          res.send({
-            message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found or req.body is empty!`
-          });
-        }
-      })
-      .catch(err => {
-        res.status(500).send({
-          message: "Error updating Tutorial with id=" + id
+
+    }
+    else{
+        console.log('BATMAN')
+        contains= await db.sequelize.query('UPDATE RENTS SET QUANTITY=(:quantity) WHERE TID=(:tid) AND PID=(:pid)',{
+          replacements:{tid:req.query.tid,
+          quantity:req.query.quantity,
+        pid:req.query.pid,
+        },
+          type: db.sequelize.QueryTypes.UPDATE
         });
-      });
+    }
 };
 
-  exports.delete = (req, res) => {
-    const id = req.params.id;
-    Rent.destroy({
-      where: { id: id }
-    })
-      .then(num => {
-        if (num == 1) {
-          res.send({
-            message: "Tutorial was deleted successfully!"
-          });
-        } else {
-          res.send({
-            message: `Cannot delete Tutorial with id=${id}. Maybe Tutorial was not found!`
-          });
-        }
-      })
-      .catch(err => {
-        res.status(500).send({
-          message: "Could not delete Tutorial with id=" + id
-        });
+  exports.delete = async (req, res) => {
+    contains= await db.sequelize.query('DELETE FROM RENTS WHERE TID=(:tid) AND PID=(:pid)',{
+        replacements:{tid:req.query.tid,
+      pid:req.query.pid,
+      },
+        type: db.sequelize.QueryTypes.DELETE
       });
   };
 

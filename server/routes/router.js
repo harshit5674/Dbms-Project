@@ -123,12 +123,11 @@ route.get('/add-rent',(req,res)=>{
     res.render("add_rent",{tid:req.query.id});
 })
 route.get('/update_rent',(req,res)=>{
-    const id=req.params.id;
-    console.log(id);
-    axios.get('http://localhost:3000/api/rents/',{params:{id:req.query.id}})
+    axios.get("http://localhost:3000/api/rents?id="+req.query.id+"&pid="+req.query.pid)
     .then(function(productdata){
-        console.log(id);
-        console.log(productdata.data)
+        console.log(productdata);
+        console.log(productdata.data);
+        console.log('HI');
         res.render("update_rent",{rent:productdata.data,tid:req.query.id});
     })
 })
