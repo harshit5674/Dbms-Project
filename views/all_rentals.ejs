@@ -33,52 +33,52 @@
 
 	</head>
 	<body>
-    <header id="header" class="fixed-top">
-      <div class="container d-flex align-items-center">
-        <h1 class="logo me-auto"><a href="#">Style Mart</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-  
-        <nav id="navbar" class="navbar">
-          <ul>
-            <li><a class="nav-link scrollto " href="/home">Home</a></li>
-            <li><a class="nav-link scrollto" href="/product">Product</a></li>
-            <li>
-              <a class="nav-link scrollto " href="/worker">Worker</a>
-            </li>
-            <li><a class="nav-link scrollto" href="/customer">Customer</a></li>
-            <li><a class="nav-link scrollto" href="/transaction">Transaction</a></li>
-            <li><a class="nav-link scrollto" href="/rental">Rental</a></li>
-            <li><a class="nav-link scrollto" href="/purchase_history">Purchase</a></li>
-            <li><a class="nav-link scrollto" href="/all_transactions">All Transaction</a></li>
-            <li><a class="nav-link scrollto" href="/all_rentals">All Rental</a></li>
-  
-            <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+        <header id="header" class="fixed-top">
+            <div class="container d-flex align-items-center">
+              <h1 class="logo me-auto"><a href="#">Style Mart</a></h1>
+              <!-- Uncomment below if you prefer to use an image logo -->
+              <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        
+              <nav id="navbar" class="navbar">
                 <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
+                  <li><a class="nav-link scrollto " href="/home">Home</a></li>
+                  <li><a class="nav-link scrollto" href="/product">Product</a></li>
+                  <li>
+                    <a class="nav-link scrollto " href="/worker">Worker</a>
+                  </li>
+                  <li><a class="nav-link scrollto" href="/customer">Customer</a></li>
+                  <li><a class="nav-link scrollto" href="/transaction">Transaction</a></li>
+                  <li><a class="nav-link scrollto " href="/rental">Rental</a></li>
+                  <li><a class="nav-link scrollto" href="/purchase_history">Purchase</a></li>
+                  <li><a class="nav-link scrollto" href="/all_transactions">All Transaction</a></li>
+                  <li><a class="nav-link scrollto active" href="/all_rentals">All Rental</a></li>
+        
+                  <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+                  <ul>
+                    <li><a href="#">Drop Down 1</a></li>
+                    <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+                      <ul>
+                        <li><a href="#">Deep Drop Down 1</a></li>
+                        <li><a href="#">Deep Drop Down 2</a></li>
+                        <li><a href="#">Deep Drop Down 3</a></li>
+                        <li><a href="#">Deep Drop Down 4</a></li>
+                        <li><a href="#">Deep Drop Down 5</a></li>
+                      </ul>
+                    </li>
+                    <li><a href="#">Drop Down 2</a></li>
+                    <li><a href="#">Drop Down 3</a></li>
+                    <li><a href="#">Drop Down 4</a></li>
+                  </ul>
+                </li> -->
+                  <li>
+                    <a class="getstarted scrollto" href="/">Logout</a>
+                  </li>
                 </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li> -->
-            <li>
-              <a class="getstarted scrollto" href="/">Logout</a>
-            </li>
-          </ul>
-          <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav>
-        <!-- .navbar -->
-      </div>
-    </header>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+              </nav>
+              <!-- .navbar -->
+            </div>
+          </header>
           <style>
                         
             .ben {
@@ -90,9 +90,6 @@
               transform: translate(-50%, -50%);
             }
           </style>
-            <div>
-              <a href="/add-rent?id=<%=tid%>" class="btn btn-outline-secondary ben" >Add A New Product To Cart</a>
-            </div>
             <br>
 	<section class="ftco-section">
 		<div class="container">
@@ -108,8 +105,8 @@
 					        <th>Transaction ID</th>
 					        <th>Product Id</th>
 					        <th>Quantity</th>
+                            <th>Penalty</th>
 					        <th>Update</th>
-					        <th>Delete</th>
 					      </tr>
 					    </thead>
 					    <tbody>
@@ -118,8 +115,8 @@
                                     <td><%=rents[i].tid%></td>
                                     <td><%=rents[i].pid%></td>
                                     <td><%=rents[i].quantity%></td>
-                                    <td><a href="/update_rent?id=<%=rents[i].tid%>&pid=<%=rents[i].pid%>" class="btn btn-success">Update</a></td>
-                                    <td><button class="btn btn-danger" onclick="delete_all(<%=rents[i].tid%>,<%=rents[i].pid%>)">Delete</button></td>
+                                    <td><%=rents[i].penalty%></td>
+                                    <td><a href="/update_rent_?id=<%=rents[i].tid%>&pid=<%=rents[i].pid%>" class="btn btn-success">Update</a></td>
                                 </tr>
                                 <%}%>
 					    </tbody>
@@ -140,7 +137,6 @@
         }
       </style>
     <br>
-    <button onclick="generateBill()" class ="btn btn-outline-secondary ben1" >Buy</button>
     <script>
       function generateBill() {
           const queryString = window.location.search;

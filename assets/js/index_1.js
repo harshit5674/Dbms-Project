@@ -99,7 +99,6 @@ $("#add_contains").submit(function(event){
 }).then(data => {
         console.log('Batman')
         console.log(data);
-        console.log(data[0].quantity_sell)
         td=data[0].quantity_sell
         if(q<=data[0].quantity_sell){
             var request={
@@ -159,26 +158,24 @@ $("#add_rents").submit(function(event){
     }
 }).then(data => {
         console.log('Batman')
-        console.log(data);
-        console.log(data[0].quantity)
-        td=data[0].quantity
+        console.log(data1);
         if(q<=data[0].quantity_rent){
+            console.log("l")
             var request={
                 "url": 'http://localhost:3000/api/rents/',
                 "method":"POST",
                 "data":data1
             }
             $.ajax(request).done(function(response){
-               window.location.href = "/rent?id="+data1.tid;
+                window.location.href = "/rent?id="+data1.tid;
             })
         }
         else{
             alert("Not Enough Quantity")
             window.location.href = "/rent?id="+data1.tid;
         }
+        window.location.href = "/rent?id="+data1.tid;
 }).catch(err => console.error(err));
-    console.log('q='+q)
-    console.log(td)
 
 
     

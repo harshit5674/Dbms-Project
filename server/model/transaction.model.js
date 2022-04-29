@@ -2,6 +2,7 @@ module.exports = (sequelize, Sequelize) => {
     const Transaction = sequelize.define("transaction", {
       id: {
         type: Sequelize.STRING,
+        allowNull: false,
         primaryKey: true
       },
       date: {

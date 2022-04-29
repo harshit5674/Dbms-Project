@@ -1,4 +1,5 @@
 const { reset } = require("nodemon");
+const { contains } = require("../model");
 const db = require("../model");
 const Contain = db.contains;
 const Op = db.Sequelize.Op;
@@ -31,7 +32,7 @@ exports.create = (req, res) => {
 exports.findAll = async (req, res) => {
   if(req.query.sum){
     const id=req.query.id;
-      contains= await db.sequelize.query('UPDATE PRODUCTS,CONTAINS SET PRODUCTS.QUANTITY_SELL=PRODUCTS.QUANTITY_SELL-CONTAINS.QUANTITY WHERE PRODUCTS.ID=CONTAINS.PID AND CONTAINS.TID=(:id)',{
+      xyz= await db.sequelize.query('UPDATE PRODUCTS,CONTAINS SET PRODUCTS.QUANTITY_SELL=PRODUCTS.QUANTITY_SELL-CONTAINS.QUANTITY WHERE PRODUCTS.ID=CONTAINS.PID AND CONTAINS.TID=(:id)',{
         replacements:{id:req.query.id},
         type: db.sequelize.QueryTypes.UPDATE
       });
@@ -41,29 +42,47 @@ exports.findAll = async (req, res) => {
      });
   return res.status(200).json(sums)
   }
+  else if(req.query.why){
+      indi= await db.sequelize.query('SELECT SUM(C.QUANTITY*P.SELLING_PRICE) AS INDI FROM PRODUCTS P,CONTAINS C WHERE C.PID=(:pid) AND P.ID=C.PID AND C.TID=(:tid)',{
+        replacements:{pid:req.query.pid,
+        tid:req.query.tid},
+        type: db.sequelize.QueryTypes.SELECT
+      });
+     sums= await db.sequelize.query('SELECT SUM(C.QUANTITY*P.SELLING_PRICE) AS TOTAL FROM PRODUCTS P,CONTAINS C WHERE P.ID=C.PID AND C.TID=(:tid)',{
+     replacements:{tid:req.query.tid,
+    },
+       type: db.sequelize.QueryTypes.SELECT
+     });
+     const data={
+      indi:indi,
+      sums:sums,
+    }
+    console.log(data)
+  return res.send(data)
+  }
   else if(req.query.pid){
     const id=req.query.id;
     const pid=req.query.pid;
-    contains= await db.sequelize.query('SELECT * FROM CONTAINS WHERE TID=(:id) AND PID=(:pid)',{
+    abc= await db.sequelize.query('SELECT * FROM CONTAINS WHERE TID=(:id) AND PID=(:pid)',{
       replacements:{id:req.query.id,
       pid:req.query.pid},
       type: db.sequelize.QueryTypes.SELECT
     });
-  return res.status(200).json(contains)
+  return res.status(200).json(abc) 
   }
   else if(req.query.id){
     const id=req.query.id;
-    contains= await db.sequelize.query('SELECT * FROM CONTAINS WHERE TID=(:id)',{
+    abs= await db.sequelize.query('SELECT * FROM CONTAINS WHERE TID=(:id)',{
       replacements:{id:req.query.id},
       type: db.sequelize.QueryTypes.SELECT
     });
-  return res.status(200).json(contains)
+  return res.status(200).json(abs)
   }
   else{
-    contains= await db.sequelize.query('SELECT * FROM CONTAINS ',{
+    con= await db.sequelize.query('SELECT * FROM CONTAINS ',{
       type: db.sequelize.QueryTypes.SELECT
     });
-  return res.status(200).json(contains)
+  return res.status(200).json(con)
   }
   };
 
@@ -88,7 +107,7 @@ exports.findOne = (req, res) => {
 
 exports.update = async (req, res) => {
   console.log('BATMAN')
-    contains= await db.sequelize.query('UPDATE CONTAINS SET QUANTITY=(:quantity) WHERE TID=(:tid) AND PID=(:pid)',{
+    abs= await db.sequelize.query('UPDATE CONTAINS SET QUANTITY=(:quantity) WHERE TID=(:tid) AND PID=(:pid)',{
       replacements:{tid:req.query.tid,
       quantity:req.query.quantity,
     pid:req.query.pid,
@@ -98,7 +117,7 @@ exports.update = async (req, res) => {
 };
 
   exports.delete = async (req, res) => {
-    contains= await db.sequelize.query('DELETE FROM CONTAINS WHERE TID=(:tid) AND PID=(:pid)',{
+  abs= await db.sequelize.query('DELETE FROM CONTAINS WHERE TID=(:tid) AND PID=(:pid)',{
       replacements:{tid:req.query.tid,
     pid:req.query.pid,
     },

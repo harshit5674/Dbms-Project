@@ -24,7 +24,6 @@ require("./server/routes/rent.routes")(app);
 require("./server/routes/purchase_history.routes")(app);
 require("./server/routes/purchase.routes")(app);
 
-
 const db=require("./server/model");
 db.sequelize.sync().then(() => {
     console.log("Drop and re-sync db.");

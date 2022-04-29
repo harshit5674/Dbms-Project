@@ -33,50 +33,53 @@
 
 	</head>
 	<body>
-        <header id="header" class="fixed-top">
-            <div class="container d-flex align-items-center">
-              <h1 class="logo me-auto"><a href="#">Style Mart</a></h1>
-              <!-- Uncomment below if you prefer to use an image logo -->
-              <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-      
-              <nav id="navbar" class="navbar">
+    <header id="header" class="fixed-top">
+      <div class="container d-flex align-items-center">
+        <h1 class="logo me-auto"><a href="#">Style Mart</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+  
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li><a class="nav-link scrollto " href="/home">Home</a></li>
+            <li><a class="nav-link scrollto" href="/product">Product</a></li>
+            <li>
+              <a class="nav-link scrollto " href="/worker">Worker</a>
+            </li>
+            <li><a class="nav-link scrollto" href="/customer">Customer</a></li>
+            <li><a class="nav-link scrollto" href="/transaction">Transaction</a></li>
+            <li><a class="nav-link scrollto" href="/rental">Rental</a></li>
+            <li><a class="nav-link scrollto" href="/purchase_history">Purchase</a></li>
+            <li><a class="nav-link scrollto active" href="/all_transactions">All Transaction</a></li>
+            <li><a class="nav-link scrollto" href="/all_rentals">All Rental</a></li>
+  
+            <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#">Drop Down 1</a></li>
+              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                  <li><a class="nav-link scrollto" href="#about">About</a></li>
-                  <li>
-                    <a class="nav-link scrollto" href="/worker">Worker</a>
-                  </li>
-                  <li><a class="nav-link scrollto" href="#portfolio">Customer</a></li>
-                  <li><a class="nav-link scrollto" href="#team">Product</a></li>
-                  <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-                  <ul>
-                    <li><a href="#">Drop Down 1</a></li>
-                    <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                      <ul>
-                        <li><a href="#">Deep Drop Down 1</a></li>
-                        <li><a href="#">Deep Drop Down 2</a></li>
-                        <li><a href="#">Deep Drop Down 3</a></li>
-                        <li><a href="#">Deep Drop Down 4</a></li>
-                        <li><a href="#">Deep Drop Down 5</a></li>
-                      </ul>
-                    </li>
-                    <li><a href="#">Drop Down 2</a></li>
-                    <li><a href="#">Drop Down 3</a></li>
-                    <li><a href="#">Drop Down 4</a></li>
-                  </ul>
-                </li> -->
-                  <li>
-                    <a class="nav-link scrollto" href="#contact">Purchase History</a>
-                  </li>
-                  <li>
-                    <a class="getstarted scrollto" href="#about">Logout</a>
-                  </li>
+                  <li><a href="#">Deep Drop Down 1</a></li>
+                  <li><a href="#">Deep Drop Down 2</a></li>
+                  <li><a href="#">Deep Drop Down 3</a></li>
+                  <li><a href="#">Deep Drop Down 4</a></li>
+                  <li><a href="#">Deep Drop Down 5</a></li>
                 </ul>
-                <i class="bi bi-list mobile-nav-toggle"></i>
-              </nav>
-              <!-- .navbar -->
-            </div>
-          </header>
+              </li>
+              <li><a href="#">Drop Down 2</a></li>
+              <li><a href="#">Drop Down 3</a></li>
+              <li><a href="#">Drop Down 4</a></li>
+            </ul>
+          </li> -->
+            <li>
+              <a class="getstarted scrollto" href="/">Logout</a>
+            </li>
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+        <!-- .navbar -->
+      </div>
+    </header>
+    </header>
           <style>
                         
             .ben {
@@ -88,6 +91,7 @@
               transform: translate(-50%, -50%);
             }
           </style>
+            
             <br>
 	<section class="ftco-section">
 		<div class="container">
@@ -101,24 +105,18 @@
 					    <thead class="thead-primary">
 					      <tr>
 					        <th>Transaction ID</th>
-					        <th>Date</th>
-					        <th>Customer ID</th>
-					        <th>Worker ID</th>
-					        <th>Update</th>
-					        <th>Delete</th>
+					        <th>Product Id</th>
+					        <th>Quantity</th>
 					      </tr>
 					    </thead>
 					    <tbody>
-                            <% for(var i=0;i < transactions.length ;i++){%>
+                            <% for(var i=0;i < contains.length ;i++){%>
                                 <tr>
-                                    <td><%=transactions[i].id%></td>
-                                    <td><%=transactions[i].date%></td>
-                                    <td><%=transactions[i].cid%></td>
-                                    <td><%=transactions[i].wid%></td>
-                                    <td><a href="/update_transaction?id=<%=transactions[i].id%>" class="btn btn-success">Update</a></td>
-                                    <td><a class="btn btn-danger delete" data-id=<%=transactions[i].id%>>Delete</a></td>
+                                    <td onclick="generateBill(<%=contains[i].tid%>,<%=contains[i].pid%>,<%=contains[i].quantity%>)"><%=contains[i].tid%></td>
+                                    <td><%=contains[i].pid%></td>
+                                    <td><%=contains[i].quantity%></td>
                                 </tr>
-                                <%}%>
+                              <%}%>
 					    </tbody>
 					  </table>
 					</div>
@@ -126,6 +124,45 @@
 			</div>
 		</div>
 	</section>
+    <style>          
+        .ben1 {
+          margin: 0;
+          position: relative;
+          top: 12%;
+          left: 50%;
+          -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+        }
+      </style>
+    <br>
+    <script>
+      function generateBill(tid,pid,quantity) {
+          const queryString = window.location.search;
+          const urlParams = new URLSearchParams(queryString);
+          const id = urlParams.get('id')
+          fetch("http://localhost:3000/api/contains?tid="+tid+"&pid="+pid+"&quantity="+quantity+"&why=1")
+          .then(response => {
+          if(response.ok) {
+            return response.json();
+}
+}).then(data => {
+        console.log('Batman');
+        console.log(data)
+          alert("Cost of this Part of Transaction= "+data.indi[0].INDI+"\n"+"Total Cost of this Transaction= "+data.sums[0].TOTAL)
+      })
+  }
+  function delete_all(tid,pid){
+    console.log('IN');
+    var request={
+              "url": 'http://localhost:3000/api/contains?tid='+tid+'&pid='+pid,
+              "method":"DELETE",
+          }
+    $.ajax(request).done(function(response){
+          })
+      alert('Item would be Deleted')
+      window.location.href = "/contain?id="+tid;
+  }
+  </script>
 
 	<script src="js/jquery.min.js"></script>
   <script src="js/popper.js"></script>

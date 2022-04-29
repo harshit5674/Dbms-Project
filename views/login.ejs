@@ -38,14 +38,14 @@
 			</div>
 
 			<div class="login">
-				<form>
+				<form id="index">
 
 					
 
 					<label for="chk" aria-hidden="true">Login</label>
 
                   <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email" placeholder="Username">
+						<input class="input100" type="text" name="username" id="username" placeholder="Username">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 						
@@ -54,22 +54,41 @@
                   
 
 					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="pass" placeholder="Password">
+						<input class="input100" type="password" name="pass" id="pass" placeholder="Password">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							
 						</span>
 					</div>
+					
 
 					<!-- <input type="email" name="email" placeholder="Email" required=""> -->
 					<!-- <input type="password" name="pswd" placeholder="Password" required=""> -->
-					<!-- <button>Login</button> -->
+					<br>
+					<br>
+					<button style="background-color: #32CD32; border: none; border-radius: 5px; color: #333; /* Dark grey */ padding: 10px 40px; position: relative;
+					top: 100%;
+					left: 50%;
+					-ms-transform: translate(-50%, -50%);
+					transform: translate(-50%, -50%)" type="reset" onclick="login()">Login</button> 
                     
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Login
-						</button>
-					</div>
+					
+						<script>
+							function login(){
+								//import V from './values';
+								var username = document.getElementById("username").value;
+								var pass = document.getElementById("pass").value;
+								if(username=="admin" && pass=="pass"){
+									//V.value=1;
+									window.location.replace('http://localhost:3000/home');
+								}								
+								else{
+									alert("Wrong Credentials");
+									window.location.href="/";
+								}
+							}
+						</script>
+					
 
 
 				</form>

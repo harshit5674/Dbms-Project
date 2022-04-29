@@ -3,6 +3,7 @@ module.exports = (sequelize, Sequelize) => {
       pid: {
         type: Sequelize.STRING,
         primaryKey: true,
+        allowNull: false,
         references: {
             model: 'products',
             key: 'id'
@@ -11,6 +12,7 @@ module.exports = (sequelize, Sequelize) => {
       phid: {
         type: Sequelize.STRING,
         primaryKey:true,
+        allowNull: false,
         references: {
             model: 'purchase_histories',
             key: 'id'

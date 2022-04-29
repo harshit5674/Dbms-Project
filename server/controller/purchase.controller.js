@@ -73,14 +73,14 @@ exports.findOne = (req, res) => {
 
 exports.update = async (req, res) => {
     if(req.query.sum){
-        contains= await db.sequelize.query('UPDATE PRODUCTS,PURCHASES SET PRODUCTS.QUANTITY_RENT=PRODUCTS.QUANTITY_RENT+PURCHASES.QUANTITY_RENT AND PRODUCTS.QUANTITY_SELL=PRODUCTS.QUANTITY_SELL+PURCHASES.QUANTITY_SELL WHERE PRODUCTS.ID=RENTS.PID AND RENTS.TID=(:id)',{
-            replacements:{id:req.query.tid},
+        contains= await db.sequelize.query('UPDATE PRODUCTS,PURCHASES SET PRODUCTS.QUANTITY_RENT=PRODUCTS.QUANTITY_RENT+PURCHASES.QUANTITY_RENT,PRODUCTS.QUANTITY_SELL=PRODUCTS.QUANTITY_SELL+PURCHASES.QUANTITY_SELL WHERE PRODUCTS.ID=PURCHASES.PID AND PURCHASES.PHID=(:id)',{
+            replacements:{id:req.query.phid},
             type: db.sequelize.QueryTypes.UPDATE
           });
     }
     else{
         console.log('BATMAN')
-        contains= await db.sequelize.query('UPDATE PURCHASES SET QUANTITY_SELL=(:quantity_sell) AND QUANTITY_RENT=(:quantity_rent) AND COST_PRICE=(:cost_price) WHERE PHID=(:phid) AND PID=(:pid)',{
+        contains= await db.sequelize.query('UPDATE PURCHASES SET QUANTITY_SELL=(:quantity_sell),QUANTITY_RENT=(:quantity_rent),COST_PRICE=(:cost_price) WHERE PHID=(:phid) AND PID=(:pid)',{
           replacements:{phid:req.query.phid,
           quantity_rent:req.query.quantity_rent,
           quantity_sell:req.query.quantity_sell,

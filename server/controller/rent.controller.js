@@ -2,35 +2,19 @@ const db = require("../model");
 const Rent = db.rents;
 const Op = db.Sequelize.Op;
 
-exports.create = (req, res) => {
-    /*if (!req.body.title) {
-        res.status(400).send({
-          message: "Content can not be empty!"
-        });
-        return;
-      }*/
-      const  rent= {
-        tid: req.body.tid,
-        pid: req.body.pid,
-        quantity: req.body.quantity,
-      };
-      // Save Tutorial in the database
-      Rent.create(rent)
-        .then(data => {
-          //res.send(data);
-          res.redirect("/add-rent");
-        })
-        .catch(err => {
-          res.status(500).send({
-            message:
-              err.message || "Some error occurred while creating the product."
-          });
-        });
+exports.create = async (req, res) => {
+  abs= await db.sequelize.query('INSERT INTO RENTS VALUES((:tid),(:pid),(:quantity),(:penalty))',{
+    replacements:{tid:req.body.tid,
+    pid:req.body.pid,
+    quantity:req.body.quantity,
+penalty:req.body.penalty},
+    type: db.sequelize.QueryTypes.INSERT
+  });
 };
 exports.findAll = async (req, res) => {
   if(req.query.sum){
     const id=req.query.id;
-      rents= await db.sequelize.query('UPDATE PRODUCTS,RENTS SET PRODUCTS.QUANTITY_RENT=PRODUCTS.QUANTITY_RENT-CONTAINS.QUANTITY WHERE PRODUCTS.ID=CONTAINS.PID AND CONTAINS.TID=(:id)',{
+      abs= await db.sequelize.query('UPDATE PRODUCTS,RENTS SET PRODUCTS.QUANTITY_RENT=PRODUCTS.QUANTITY_RENT-CONTAINS.QUANTITY WHERE PRODUCTS.ID=CONTAINS.PID AND CONTAINS.TID=(:id)',{
         replacements:{id:req.query.id},
         type: db.sequelize.QueryTypes.UPDATE
       });
@@ -86,6 +70,15 @@ exports.update = async (req, res) => {
             replacements:{id:req.query.tid},
             type: db.sequelize.QueryTypes.UPDATE
           });
+    }
+    else if(req.query.penalty){
+      contains= await db.sequelize.query('UPDATE RENTS SET PENALTY=(:penalty) WHERE TID=(:tid) AND PID=(:pid)',{
+        replacements:{tid:req.query.tid,
+          pid:req.query.pid,
+          penalty:req.query.penalty,
+        },
+        type: db.sequelize.QueryTypes.UPDATE
+      });
     }
     else{
         console.log('BATMAN')

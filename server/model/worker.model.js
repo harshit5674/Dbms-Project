@@ -2,6 +2,7 @@ module.exports = (sequelize, Sequelize) => {
     const Worker = sequelize.define("worker", {
       id: {
         type: Sequelize.STRING,
+        allowNull: false,
         primaryKey: true
       },
       name: {

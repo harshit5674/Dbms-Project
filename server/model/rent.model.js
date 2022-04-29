@@ -3,6 +3,7 @@ module.exports = (sequelize, Sequelize) => {
       tid: {
         type: Sequelize.STRING,
         primaryKey: true,
+        allowNull: false,
         references: {
             model: 'rentals',
             key: 'id'
@@ -11,6 +12,7 @@ module.exports = (sequelize, Sequelize) => {
       pid: {
         type: Sequelize.STRING,
         primaryKey:true,
+        allowNull: false,
         references: {
             model: 'products',
             key: 'id'
@@ -19,6 +21,9 @@ module.exports = (sequelize, Sequelize) => {
       quantity: {
         type: Sequelize.INTEGER,
       },
+      penalty: {
+        type: Sequelize.STRING,
+      }
     },
     {
       timestamps: false

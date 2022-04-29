@@ -2,6 +2,7 @@ module.exports = (sequelize, Sequelize) => {
     const Purchase_history = sequelize.define("purchase_history", {
       id: {
         type: Sequelize.STRING,
+        allowNull: false,
         primaryKey: true
       },
       name: {

@@ -3,6 +3,7 @@ module.exports = (sequelize, Sequelize) => {
       tid: {
         type: Sequelize.STRING,
         primaryKey: true,
+        allowNull: false,
         references: {
             model: 'transactions',
             key: 'id'

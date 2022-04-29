@@ -32,12 +32,12 @@ exports.create = (req, res) => {
 exports.findAll = async (req, res) => {
   if(req.query.id){
     const id = req.query.id;
-    products= await db.sequelize.query('SELECT * FROM PRODUCTS WHERE ID=(:id)',{
+    sjs= await db.sequelize.query('SELECT * FROM PRODUCTS WHERE ID=(:id)',{
       replacements:{id:req.query.id},
       type: db.sequelize.QueryTypes.SELECT
     });
-    console.log(products)
-    return res.status(200).json(products)
+    console.log(sjs)
+    return res.status(200).json(sjs)
   }
   else{
     const title = req.query.title;

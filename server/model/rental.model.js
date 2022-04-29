@@ -2,6 +2,7 @@ module.exports = (sequelize, Sequelize) => {
     const Rental = sequelize.define("rental", {
       id: {
         type: Sequelize.STRING,
+        allowNull: false,
         primaryKey: true
       },
       s_date: {
