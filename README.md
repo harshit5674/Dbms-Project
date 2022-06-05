@@ -1,2 +1,2 @@
 " Style-Mart" 
-A Clothes Management System.
+A Clothes Shop Management System.
